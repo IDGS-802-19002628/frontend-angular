@@ -1,0 +1,140 @@
+<app-loading-spinner [isLoading]="isLoading"></app-loading-spinner>
+
+<h1 mat-dialog-title>Agregar Cita</h1>
+
+<mat-dialog-content class="justify-content-center row">
+
+
+    <!--export interface Cita {
+  public formCita: any = this.fb.group({
+    chrClaveUsuario: [this.data.usuario],
+    dtFecha: [''],
+    chrObservaciones: [''],
+    chrClaveDepartamento: [''],
+    chrClaveUsuarioCitado: [''],
+    chrEstatus: [''],
+    chrPlantel: [''],
+    dtEntrada: [''],
+    dtSalida: [''],
+    intMonto: [''],
+    chrNombrePaciente: [''],
+    chrNombreTerapeuta: [''],
+    intEdad: [''],
+    tipoCita: [this.data.tipoCita]
+  });
+}-->
+    
+    <form [formGroup]="formCita">
+        <mat-form-field class="col-12 col-md-6">
+            <mat-label>Fecha</mat-label>
+            <input matInput [matDatepicker]="picker" formControlName="dtFecha">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+        <mat-error *ngIf="formCita.controls.dtFecha.hasError('required')">
+            La fecha es requerida
+        </mat-error>
+        </mat-form-field>
+
+        
+
+        <mat-form-field class="col-12 col-md-6">
+            <mat-label>Departamento</mat-label>
+            <mat-select formControlName="chrClaveDepartamento">
+                <mat-option *ngFor="let departamento of lstDepartamentos" [value]="departamento.chrClave">{{departamento.chrNombre}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <mat-form-field class="col-12 col-md-6">
+            <mat-label>Usuario Citado</mat-label>
+          
+            <input type="text" placeholder="Usuario Citado" aria-label="Usuario Citado" matInput formControlName="chrClaveUsuarioCitado" [matAutocomplete]="auto">
+            <mat-autocomplete #auto="matAutocomplete">
+              <mat-option *ngFor="let usuario of filteredUsuarios | async" [value]="usuario.chrClave">
+                {{ usuario.chrNombre }}
+              </mat-option>
+            </mat-autocomplete>
+          </mat-form-field>
+          
+
+        <mat-form-field class="col-12 col-md-6">
+            <mat-label>Estatus</mat-label>
+            <mat-select formControlName="chrEstatus">
+                <mat-option *ngFor="let estatus of lstEstatusCita" [value]="estatus.value">{{estatus.viewValue}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <mat-form-field class="col-12 col-md-6">
+            <mat-label>Plantel</mat-label>
+            <mat-select formControlName="chrPlantel">
+                <mat-option *ngFor="let plantel of lstPlanteles" [value]="plantel.chrClave">{{plantel.chrNombre}}</mat-option>
+            </mat-select>
+            <mat-error *ngIf="formCita.controls.chrPlantel.hasError('required')">
+                El plantel es requerido
+            </mat-error>
+        </mat-form-field>
+
+   <!--     <mat-form-field class="col-12 col-md-6">
+            <mat-label>Entrada</mat-label>
+            <input matInput formControlName="dtEntrada">
+        </mat-form-field>
+
+        <mat-form-field class="col-12 col-md-6">
+            <mat-label>Salida</mat-label>
+            <input matInput formControlName="dtSalida">
+        </mat-form-field>
+
+        <mat-form-field class="col-12 col-md-6">
+            <mat-label>Monto</mat-label>
+            <input matInput formControlName="intMonto">
+        </mat-form-field>
+
+        <mat-form-field class="col-12 col-md-6">
+            <mat-label>Nombre del Paciente</mat-label>
+            <input matInput formControlName="chrNombrePaciente">
+        </mat-form-field>
+
+        <mat-form-field class="col-12 col-md-6">
+            <mat-label>Nombre del Terapeuta</mat-label>
+            <input matInput formControlName="chrNombreTerapeuta">
+        </mat-form-field>
+
+        <mat-form-field class="col-12 col-md-6">
+            <mat-label>Edad</mat-label>
+            <input matInput formControlName="intEdad">
+        </mat-form-field>-->
+
+        <mat-form-field class="col-12 col-md-6">
+            <mat-label>Tipo de Cita</mat-label>
+            <mat-select formControlName="tipoCita">
+                <mat-option *ngFor="let tipo of lstTiposCita" [value]="tipo.value">{{tipo.viewValue}}</mat-option>
+            </mat-select>
+
+        </mat-form-field>
+
+        <mat-form-field class="col-12 col-md-12">
+            <mat-label>Observaciones</mat-label>
+            <textarea matInput formControlName="chrObservaciones"></textarea>
+            <mat-error *ngIf="formCita.controls.chrObservaciones.hasError('required')">
+                Las observaciones son requeridas
+            </mat-error>
+        </mat-form-field>
+
+    </form>
+
+</mat-dialog-content>
+
+<mat-dialog-actions class="justify-content-end">
+    <button mat-button color="warn" (click)="onCancel()">
+        <mat-icon>cancel</mat-icon>
+        <span>Cancelar</span>
+    </button>
+    <button mat-button color="primary" (click)="onSave()" cdkFocusInitial [disabled]="formCita.invalid" *ngIf="!isExist">
+        <mat-icon>save</mat-icon>
+        <span>Guardar</span>
+    </button>
+</mat-dialog-actions>
+
+
+
+
+

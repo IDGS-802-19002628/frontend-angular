@@ -1,0 +1,17 @@
+<p>list-producto works!</p>
+<div class="container">
+    <h2>Inventario de Productos</h2>
+    <div *ngFor="let producto of productos" class="card">
+      <img [src]="producto.imagen" alt="{{ producto.nombre }}">
+      <div class="card-body">
+        <h5 class="card-title">{{ producto.nombre }}</h5>
+        <p class="card-text">{{ producto.descripcion }}</p>
+        <p><strong>Precio:</strong> {{ producto.precio }}</p>
+        <p><strong>Alto:</strong> {{ producto.alto }}</p>
+        <p><strong>Largo:</strong> {{ producto.largo }}</p>
+        <p><strong>Ancho:</strong> {{ producto.ancho }}</p>
+        <p><strong>Inventario:</strong> {{ producto.inventarioProductoTerminado?.cantidad ?? 'No disponible' }}</p>
+      </div>
+    </div>
+  </div>
+  

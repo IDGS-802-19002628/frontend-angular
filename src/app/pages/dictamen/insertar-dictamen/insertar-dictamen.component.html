@@ -1,0 +1,118 @@
+<app-loading-spinner [isLoading]="isLoading"></app-loading-spinner>
+
+<mat-card class="cardWithShadow">
+    <mat-card-content class="p-24">
+        <mat-card-title>Insertar Dictamen</mat-card-title>
+        <mat-card-subtitle class="mat-body-1">Agregar un nuevo dictamen</mat-card-subtitle>
+    </mat-card-content>
+
+    <mat-card-content>
+
+
+        <mat-accordion class="w-100 m-t-12 p-24">
+            <mat-expansion-panel expanded="true">
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        <div class="d-flex w-100">
+                            <div class="flex-1-auto">Insertar Dictamen</div>
+                        </div>
+                    </mat-panel-title>
+                    <mat-panel-description>
+                        Llena los campos para insertar un nuevo dictamen
+                    </mat-panel-description>
+
+                </mat-expansion-panel-header>
+                <form [formGroup]="formDictamen" class="p-24">
+                    <mat-form-field class="col-12 col-md-6 col-lg-6 m-r-3 m-t-12">
+                        <mat-label>Registro Patronal</mat-label>
+                        <input matInput formControlName="registroPatronal" placeholder="Registro Patronal">
+                    </mat-form-field>
+
+                    <mat-form-field class="col-12 m-r-3 m-t-12 col-md-6 col-lg-6">
+                        <mat-label>Registros Patronales</mat-label>
+                        <input matInput formControlName="registrosPatronales" placeholder="Registros Patronales">
+                    </mat-form-field>
+
+                    <mat-form-field class="col-12 m-r-3 m-t-12 col-md-6 col-lg-6">
+                        <mat-label>RFC</mat-label>
+                        <input matInput formControlName="rfc" placeholder="RFC">
+                    </mat-form-field>
+
+                    <mat-form-field class="col-12 m-r-3 m-t-12 col-md-6 col-lg-6">
+                        <mat-label>Domicilio Fiscal</mat-label>
+                        <input matInput formControlName="domicilioFiscal" placeholder="Domicilio Fiscal">
+                    </mat-form-field>
+
+                    <mat-form-field class="col-12 m-r-3 m-t-12 col-md-6 col-lg-6">
+                        <mat-label>Actividad o Giro</mat-label>
+                        <input matInput formControlName="actividad" placeholder="Actividad o Giro">
+                    </mat-form-field>
+
+                    <mat-form-field class="col-12 m-r-3 m-t-12 col-md-6 col-lg-6">
+                        <mat-label>Régimen Fiscal</mat-label>
+                        <input matInput formControlName="regimenFiscal" placeholder="Régimen Fiscal">
+                    </mat-form-field>
+
+                    <mat-form-field class="col-12 m-r-3 m-t-12 col-md-4 col-lg-4">
+                        <mat-label>Tipo de Acto de Fiscalización</mat-label>
+                        <input matInput formControlName="tipoActoFiscalizacion"
+                            placeholder="Tipo de Acto de Fiscalización">
+                    </mat-form-field>
+
+                    <mat-form-field class="col-12 m-r-3 m-t-12 col-md-4 col-lg-4">
+                        <mat-label>Número de Folio</mat-label>
+                        <input matInput formControlName="numeroFolio" placeholder="Número de Folio">
+                    </mat-form-field>
+
+                    <mat-form-field class="col-12 m-r-3 m-t-12 col-md-4 col-lg-4">
+                        <mat-label>Contenido en el Oficio Número</mat-label>
+                        <input matInput formControlName="contenidoOficio" placeholder="Contenido en el Oficio Número">
+                    </mat-form-field>
+
+                    <mat-form-field class="col-12 m-r-3 m-t-12 col-md-4 col-lg-4">
+                        <mat-label>Fecha del Oficio</mat-label>
+                        <input matInput [matDatepicker]="picker" formControlName="fechaOficio"
+                            placeholder="Fecha del Oficio">
+                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker #picker></mat-datepicker>
+
+                    </mat-form-field>
+
+                    <mat-form-field class="col-12 m-r-3 m-t-12 col-md-4 col-lg-4">
+                        <mat-label class="m-t-12">Fecha de Inicio</mat-label>
+                        <input matInput [matDatepicker]="picker2" formControlName="fechaInicio"
+                            placeholder="Fecha de Inicio">
+                        <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                        <mat-datepicker #picker2></mat-datepicker>
+                    </mat-form-field>
+
+                    <mat-form-field class="col-12 m-r-3 m-t-12 col-md-4 col-lg-4">
+                        <mat-label class="m-t-12">Fecha de Término</mat-label>
+                        <input matInput [matDatepicker]="picker3" formControlName="fechaTermino"
+                            placeholder="Fecha de Término">
+                        <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
+                        <mat-datepicker #picker3></mat-datepicker>
+
+                    </mat-form-field>
+
+                    <mat-form-field class="col-12 m-r-3 m-t-12 col-md-6 col-lg-6">
+                        <mat-label>Período(s) a Revisar</mat-label>
+                        <input matInput formControlName="periodoRevisar" placeholder="Período(s) a Revisar">
+                    </mat-form-field>
+
+
+                   
+                </form>
+            </mat-expansion-panel>
+        </mat-accordion>
+        <div class="d-flex justify-content-end m-t-24">
+            <button mat-raised-button color="primary">
+                <mat-icon><i-tabler name="device-floppy"></i-tabler></mat-icon> Guardar
+            </button>
+
+            <button mat-raised-button color="warn" class="m-l-12" [routerLink]="['/dictamen']">
+                <mat-icon><i-tabler name="x"></i-tabler></mat-icon> Cancelar
+            </button>
+        </div>
+    </mat-card-content>
+</mat-card>

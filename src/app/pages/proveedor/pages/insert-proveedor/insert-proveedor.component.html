@@ -1,0 +1,56 @@
+<mat-card class="edit-proveedor-card">
+  <mat-card-header>
+    <mat-card-title>Registrar Proveedor</mat-card-title>
+  </mat-card-header>
+  <br>
+  <mat-card-content>
+    <form [formGroup]="insertProveedorForm" (ngSubmit)="onSubmit()">
+      <!-- Campo Nombre -->
+      <mat-form-field appearance="fill" class="w-100">
+        <mat-label>Nombre</mat-label>
+        <input matInput formControlName="nombre" placeholder="Nombre" required>
+        <mat-error *ngIf="insertProveedorForm.get('nombre')?.hasError('required')">
+          El campo nombre es requerido.
+        </mat-error>
+      </mat-form-field>
+    
+      <!-- Campo Teléfono -->
+      <mat-form-field appearance="fill" class="w-100">
+        <mat-label>Teléfono</mat-label>
+        <input matInput formControlName="telefono" placeholder="Teléfono" required>
+        <mat-error *ngIf="insertProveedorForm.get('telefono')?.hasError('required')">
+          El campo teléfono es requerido.
+        </mat-error>
+        <mat-error *ngIf="insertProveedorForm.get('telefono')?.hasError('pattern')">
+          El teléfono debe contener solo números.
+        </mat-error>
+      </mat-form-field>
+    
+      <!-- Campo Correo -->
+      <mat-form-field appearance="fill" class="w-100">
+        <mat-label>Correo</mat-label>
+        <input matInput formControlName="email" placeholder="Correo" required>
+        <mat-error *ngIf="insertProveedorForm.get('email')?.hasError('required')">
+          El campo correo es requerido.
+        </mat-error>
+        <mat-error *ngIf="insertProveedorForm.get('email')?.hasError('email')">
+          El correo debe ser un email válido.
+        </mat-error>
+      </mat-form-field>
+    
+      <!-- Campo Dirección -->
+      <mat-form-field appearance="fill" class="w-100">
+        <mat-label>Dirección</mat-label>
+        <input matInput formControlName="direccion" placeholder="Dirección">
+      </mat-form-field>
+    
+      <!-- Botón Enviar -->
+      <div class="text-end mt-4">
+        <button mat-raised-button color="primary">Registrar</button>
+        <button mat-raised-button color="accent" (click)="cancelar()">
+          Cancelar
+        </button>
+      </div>
+    </form>
+  </mat-card-content>
+</mat-card>

@@ -1,0 +1,137 @@
+<app-loading-spinner [isLoading]="isLoading"></app-loading-spinner>
+
+<mat-card class="cardWithShadow">
+
+    <mat-card-content class="p-24">
+        <mat-card-title>Insertar Usuario</mat-card-title>
+    </mat-card-content>
+
+    <mat-card-content class="p-24">
+        <form [formGroup]="formUsuario" class="row">
+
+
+            <mat-form-field class="col-12 col-md-6 col-lg-6 m-r-3 m-t-12">
+                <mat-label>Clave</mat-label>
+                <input matInput placeholder="Clave" formControlName="clave" maxlength="8">
+            </mat-form-field>
+
+
+            <mat-form-field class="col-12 col-md-6 col-lg-6 m-r-3 m-t-12">
+                <mat-label>Contraseña</mat-label>
+                <input matInput placeholder="Contraseña" type="password" formControlName="password">
+                <mat-error *ngIf="formUsuario?.get('password')?.hasError('required')">
+                    La contraseña es requerida
+                </mat-error>
+                <mat-error *ngIf="formUsuario?.get('password')?.hasError('minlength')">
+                    La contraseña debe tener al menos 8 caracteres
+                </mat-error>
+                <mat-error *ngIf="formUsuario?.get('password')?.hasError('maxlength')">
+                    La contraseña no debe tener mas de 8 caracteres
+                </mat-error>
+            </mat-form-field>
+
+            <mat-form-field class="col-12">
+                <mat-label>Nombre(s)</mat-label>
+                <input matInput placeholder="Nombre Completo" formControlName="nombre">
+                <mat-error *ngIf="formUsuario?.get('nombre')?.hasError('required')">
+                    El nombre / los nombres son requeridos
+                </mat-error>
+                <mat-error *ngIf="formUsuario?.get('nombre')?.hasError('minlength')">
+                    El nombre debe tener al menos 3 caracteres
+                </mat-error>
+                <mat-error *ngIf="formUsuario?.get('nombre')?.hasError('pattern')">
+                    El nombre solo debe contener letras
+                </mat-error>
+            </mat-form-field>
+
+            <mat-form-field class="col-12 col-md-6 col-lg-6 m-r-3 m-t-12">
+                <mat-label>Apellido Paterno</mat-label>
+                <input matInput placeholder="Apellido Paterno" formControlName="apellidoPaterno">
+                <mat-error *ngIf="formUsuario?.get('apellidoPaterno')?.hasError('required')">
+                    El apellido paterno es requerido
+                </mat-error>
+                <mat-error *ngIf="formUsuario?.get('apellidoPaterno')?.hasError('minlength')">
+                    El apellido paterno debe tener al menos 3 caracteres
+                </mat-error>
+                <mat-error *ngIf="formUsuario?.get('apellidoPaterno')?.hasError('pattern')">
+                    El apellido paterno solo debe contener letras
+                </mat-error>
+            </mat-form-field>
+
+            <mat-form-field class="col-12 col-md-6 col-lg-6 m-r-3 m-t-12">
+                <mat-label>Apellido Materno</mat-label>
+                <input matInput placeholder="Apellido Materno" formControlName="apellidoMaterno">
+                <mat-error *ngIf="formUsuario?.get('apellidoMaterno')?.hasError('required')">
+                    El apellido materno solo debe contener letras
+                </mat-error>
+                <mat-error *ngIf="formUsuario?.get('apellidoMaterno')?.hasError('minlength')">
+                    El apellido materno debe tener al menos 3 caracteres
+                </mat-error>
+                <mat-error *ngIf="formUsuario?.get('apellidoMaterno')?.hasError('pattern')">
+                    El apellido paterno no debe contener números
+                </mat-error>
+            </mat-form-field>
+
+            <mat-form-field class="col-md-12">
+                <mat-label class="m-t-12">Fecha de Nacimiento</mat-label>
+                <input matInput [matDatepicker]="picker2" placeholder="Fecha de Nacimiento"
+                    formControlName="fechaNacimiento">
+                <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                <mat-datepicker #picker2></mat-datepicker>
+            </mat-form-field>
+
+            <!--ME FALTA VALIDAR ESTOS CAMPOS Y USAR LOS SERVICIOS PARA OBTEENR LOS DOMICILIOS MAS FACIL-->
+            <mat-form-field class="col-12 col-md-6 col-lg-6 m-r-3 m-t-12">
+                <mat-label class="m-t-12">Domicilio</mat-label>
+                <input matInput placeholder="Domicilio" formControlName="domicilio">
+            </mat-form-field>
+
+            <mat-form-field class="col-12 col-md-6 col-lg-6 m-r-3 m-t-12">
+                <mat-label class="m-t-12">Teléfono</mat-label>
+                <input matInput placeholder="Teléfono" formControlName="telefono">
+            </mat-form-field>
+
+            <mat-form-field class="col-12 col-md-6 col-lg-6 m-r-3 m-t-12">
+                <mat-label class="mt-12">RFC</mat-label>
+                <input matInput placeholder="RFC" formControlName="rfc">
+            </mat-form-field>
+
+            <mat-form-field class="col-12 col-md-6 col-lg-6 m-r-3 m-t-12">
+                <mat-label class="mt-12">CURP</mat-label>
+                <input matInput placeholder="CURP" formControlName="curp" maxlength="18">
+            </mat-form-field>
+
+            <mat-form-field class="col-12 m-r-3 m-t-12 col-md-4 col-lg-4">
+                <mat-label class="mt-12">Correo Electrónico</mat-label>
+                <input matInput placeholder="Correo Electrónico" formControlName="correoElectronico">
+            </mat-form-field>
+
+            <mat-form-field class="col-12 m-r-3 m-t-12 col-md-4 col-lg-4">
+                <mat-select placeholder="Plantel" formControlName="plantel" required>
+                    <mat-option *ngFor="let plantel of ltsPlantel" [value]="plantel.chrClave">
+                        {{plantel.chrNombre}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <mat-form-field class="col-12 m-r-3 m-t-12 col-md-4 col-lg-4">
+                <mat-label class="mt-12">Status</mat-label>
+                <mat-select placeholder="Status" formControlName="status">
+                    <mat-option *ngFor="let status of ltsStatusUser" [value]="status.chrClave">
+                        {{status.chrNombreStatus}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </form>
+
+        <div class="d-flex justify-content-end m-t-24">
+            <button mat-raised-button color="primary" (click)="insertUsuario()" [disabled]="!formUsuario.valid">
+                <mat-icon><i-tabler name="device-floppy"></i-tabler></mat-icon> Guardar
+            </button>
+
+            <button mat-raised-button color="accent" class="m-l-12" routerLink="/usuarios">
+                <mat-icon><i-tabler name="close"></i-tabler></mat-icon> Cancelar
+            </button>
+
+        </div>
+    </mat-card-content>

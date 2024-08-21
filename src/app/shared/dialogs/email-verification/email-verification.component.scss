@@ -1,0 +1,90 @@
+/*
+
+<div class="verification-code">
+    <form [formGroup]="verificationForm">
+        <div class="inputs">
+            <input *ngFor="let i of lstInputs; let index = index" type="text" [formControlName]="'input' + index" maxlength="1" (keyup)="onKeyUp($event, index)">
+        </div>
+        <div class="resend">
+            <span>¿No recibiste el código?</span>
+            <a (click)="resendCode()">Reenviar código</a>
+            <span>en {{timeLeft}} segundos</span>
+            <span *ngIf="resendError" class="error">Error al reenviar el código</span>
+            <span *ngIf="resendSuccess" class="success">Código reenviado</span>
+            <span *ngIf="resendLoading" class="loading">Reenviando código...</span>
+        </div>
+        <div class="actions">
+            <button mat-raised-button color="primary" (click)="verifyCode()" [disabled]="!verificationForm.valid || loading">
+                Verificar
+            </button>
+            <button mat-raised-button color="warn" (click)="closeDialog()" [disabled]="loading">
+                Cancelar
+            </button>
+        </div>
+    </form>
+    
+</div>
+
+*/
+
+.verification-code {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    .inputs {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 20px;
+        input {
+            width: 40px;
+            height: 40px;
+            font-size: 20px;
+            text-align: center;
+            margin: 0 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            &:focus {
+                outline: none;
+                border-color: #2196f3;
+            }
+        }
+    }
+    .resend {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-bottom: 20px;
+        span {
+            color: #666;
+            font-size: 14px;
+            margin: 5px 0;
+            &.error {
+                color: #f44336;
+            }
+            &.success {
+                color: #4caf50;
+            }
+            &.loading {
+                color: #2196f3;
+            }
+        }
+        a {
+            color: #2196f3;
+            cursor: pointer;
+            text-decoration: none;
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+    }
+    .actions {
+        display: flex;
+        justify-content: center;
+        button {
+            margin: 0 5px;
+        }
+    }
+}
+

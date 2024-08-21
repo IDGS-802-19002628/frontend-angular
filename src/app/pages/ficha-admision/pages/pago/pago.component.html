@@ -1,0 +1,52 @@
+<div class="pago-ficha-admision">
+  <!--public datosFicha: Ficha = {} as Ficha;-->
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>Pago de Ficha de Admisión</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <p>Apreciable: <strong>{{datosFicha.data.datosFicha.chrNombre + ' ' + datosFicha.data.datosFicha.chrApellidoPaterno + ' ' + datosFicha.data.datosFicha.chrApellidoMaterno}}</strong></p>
+        <p>Para poder seguir tu proceso de admisión es necesario que realices un pago de <strong>${{datosFicha.data.datosRerencia.intMonto}}</strong> correspondiente a tu ficha de admisión.</p>
+        <p>La fecha límite para realizar tu pago es el <strong>{{datosFicha.data.datosRerencia.dtFechaVencimiento}}</strong>.</p>
+        
+        <h3>Detalles del Pago</h3>
+        <p>Te recomendamos utilizar el método de pago en línea utilizando una tarjeta de débito o crédito, ya que tu pago quedará registrado enseguida y se activará el servicio correspondiente.</p>
+        
+        <div class="payment-button">
+          <button mat-stroked-button color="primary" (click)="pagarEnLinea()">
+            <mat-icon>payment</mat-icon>
+            Pagar en Línea
+        </button>
+        </div>
+        
+        <p>En caso de que no puedas realizar tu pago en línea, acude a una sucursal bancaria para llevar a cabo el depósito correspondiente con base a la siguiente información:</p>
+        <div class="bank-details">
+          <img src="assets/images/logo.png" alt="Logo Universidad" class="logo-universidad">
+        </div>
+        
+        <div class="informacion-pago">
+          <h4 class="text-center">Ficha de Admisión</h4>
+          <button mat-stroked-button color="accent" (click)="generarComprobantePago()">
+            <mat-icon>file_download</mat-icon>
+            Descargar Referencia
+          </button>
+          <br>
+          <br>
+          <p>Banco: <strong>BanBajío</strong></p>
+          <p>Referencia: <strong>{{datosFicha.data.datosRerencia.chrLineaReferencia2}}</strong></p>
+          <p>Monto: <strong>${{datosFicha.data.datosRerencia.intMonto}}</strong></p>
+          <p>Fecha Límite: <strong>{{datosFicha.data.datosRerencia.dtFechaVencimiento}}</strong></p>
+
+        </div>
+  
+        <h4>Importante:</h4>
+        <ol>
+          <li>Al realizar tu pago directamente en ventanilla, este se verá reflejado hasta 48 horas hábiles después de haberlo realizado.</li>
+          <li>Al utilizar el Pago en Línea desde esta sección, tu pago queda aplicado en el mismo momento en que lo finalizas.</li>
+          <li>Si realizas tu pago y no queda reflejado en línea o el depósito en ventanilla después de 48 horas hábiles, es necesario acudir a tu cualquier sucursal para aclararlo.</li>
+          <li>En caso de que tu pago en línea no ha recibido confirmación de la universidad, envía un email a <a href="mailto:buzon@unimundial.edu.mx" target="_blank"> <strong>buzon@unimundial.edu.mx</strong> </a>
+        </ol>
+      </mat-card-content>
+    </mat-card>
+  </div>
+  

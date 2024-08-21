@@ -1,0 +1,163 @@
+<app-loading-spinner [isLoading]="isLoading"></app-loading-spinner>
+<div class="row justify-content-center">
+
+<mat-card class="cardWithShadow col-md-8 margin-top-center-bottom">
+    <!--FECHA-->
+    <mat-card-header>
+        <mat-card-title></mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content class="pt-0">
+        <div class="row justify-content-center">
+
+            <div class="col-md-12 text-center">
+                <img src="assets/images/logo.png" alt="logo" class="img-fluid" style="width: 200px; height: 200px;">
+            </div>
+            <div class="col-md-12 text-center">
+                <h1>Ficha de Admisión</h1>
+            </div>
+            <form [formGroup]="formularioFicha" class="row col-md-12">
+                <mat-form-field class="col-md-6">
+                    <mat-label>Correo Electrónico</mat-label>
+                    <input matInput placeholder="Correo Electrónico" formControlName="chrCorreoElectronico">
+                    <mat-error *ngIf="formularioFicha?.get('chrCorreoElectronico')?.hasError('required')">
+                        El correo electrónico es requerido
+                    </mat-error>
+                    <mat-error *ngIf="formularioFicha?.get('chrCorreoElectronico')?.hasError('email')">
+                        El correo electrónico no es válido
+                    </mat-error>
+                    <mat-hint>
+                        Se enviará un correo de confirmación a esta dirección
+                    </mat-hint>
+                </mat-form-field>
+                <mat-form-field class="col-md-6">
+                    <mat-label>Nombre(s)</mat-label>
+                    <input matInput placeholder="Nombre Completo" formControlName="chrNombre">
+                    <mat-error *ngIf="formularioFicha?.get('chrNombre')?.hasError('required')">
+                        El nombre es requerido
+                    </mat-error>
+
+                </mat-form-field>
+                <mat-form-field class="col-md-6">
+                    <mat-label>Apellido Paterno</mat-label>
+                    <input matInput placeholder="Apellido Paterno" formControlName="chrApellidoPaterno">
+                    <mat-error *ngIf="formularioFicha?.get('chrApellidoPaterno')?.hasError('required')">
+                        El apellido paterno es requerido
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field class="col-md-6">
+                    <mat-label>Apellido Materno</mat-label>
+                    <input matInput placeholder="Apellido Materno" formControlName="chrApellidoMaterno">
+                    <mat-error *ngIf="formularioFicha?.get('chrApellidoMaterno')?.hasError('required')">
+                        El apellido materno es requerido
+                    </mat-error>
+
+                </mat-form-field>
+
+                <mat-form-field class="col-md-6">
+                    <mat-label>Género</mat-label>
+                    <mat-select formControlName="chrGenero">
+                        <mat-option *ngFor="let genero of sexos" [value]="genero.value">
+                            {{genero.viewValue}}
+                        </mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="formularioFicha?.get('chrGenero')?.hasError('required')">
+                        El género es requerido
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field class="col-md-6">
+                    <mat-label>Teléfono</mat-label>
+                    <input matInput placeholder="Número de Teléfono" formControlName="chrNumeroTelefono">
+                    <mat-error *ngIf="formularioFicha?.get('chrNumeroTelefono')?.hasError('required')">
+                        El número de teléfono es requerido
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field class="col-md-6">
+                    <mat-label>Fecha de Nacimiento</mat-label>
+                    <input matInput [matDatepicker]="picker" placeholder="Fecha de Nacimiento" formControlName="dtFechaNacimiento">
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                    <mat-error *ngIf="formularioFicha?.get('dtFechaNacimiento')?.hasError('required')">
+                        La fecha de nacimiento es requerida
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field class="col-md-6">
+                    <mat-label>Dirección</mat-label>
+                    <input matInput placeholder="Dirección" formControlName="chrDireccion">
+                    <mat-error *ngIf="formularioFicha?.get('chrDireccion')?.hasError('required')">
+                        La dirección es requerida
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field class="col-md-6">
+                    <mat-label>Ciudad de Residencia</mat-label>
+                    <input matInput placeholder="Ciudad de Residencia" formControlName="chrCiudadResidencia">
+                    <mat-error *ngIf="formularioFicha?.get('chrCiudadResidencia')?.hasError('required')">
+                        La ciudad de residencia es requerida
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field class="col-md-6">
+                    <mat-label>Preparatoria de Egreso</mat-label>
+                    <input matInput placeholder="Preparatoria de Egreso" formControlName="chrPreparatoriaEgreso">
+                    <mat-error *ngIf="formularioFicha?.get('chrPreparatoriaEgreso')?.hasError('required')">
+                        La preparatoria de egreso es requerida
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field class="col-md-6">
+                    <mat-label>Licenciatura de Interés</mat-label>
+                    <mat-select formControlName="chrLicenciaturaInteres">
+                        <mat-option *ngFor="let licenciatura of licenciaturas" [value]="licenciatura.value">
+                            {{licenciatura.viewValue}}
+                        </mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="formularioFicha?.get('chrLicenciaturaInteres')?.hasError('required')">
+                        La licenciatura de interés es requerida
+                    </mat-error>
+
+                </mat-form-field>
+                <mat-form-field class="col-md-6">
+                    <mat-label>Horario de Interés</mat-label>
+                    <mat-select formControlName="chrHorarioInteres">
+                        <mat-option *ngFor="let horario of horarios" [value]="horario.value">
+                            {{horario.viewValue}}
+                        </mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="formularioFicha?.get('chrHorarioInteres')?.hasError('required')">
+                        El horario de interés es requerido
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field class="col-md-6">
+                    <mat-label>¿Cómo nos conoció?</mat-label>
+                    <mat-select formControlName="chrComoConocio">
+                        <mat-option *ngFor="let medio of medios" [value]="medio.value">
+                            {{medio.viewValue}}
+                        </mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="formularioFicha?.get('chrComoConocio')?.hasError('required')">
+                        El medio por el que nos conoció es requerido
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field class="col-md-6 ">
+                    <mat-label>Plantel de Interés</mat-label>
+                    <mat-select formControlName="chrClavePlantel">
+                        <mat-option *ngFor="let plantel of lstPlanteles" [value]="plantel.chrClave">
+                            {{plantel.chrNombre}} - {{plantel.chrDireccion}}
+                        </mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="formularioFicha?.get('chrClavePlantel')?.hasError('required')">
+                        El plantel de interés es requerido
+                    </mat-error>
+                </mat-form-field>
+
+
+
+                <div class="col-md-12 d-flex justify-content-end">
+                    <button mat-raised-button color="primary" (click)="openEmailVerificationDialog()" [disabled]="formularioFicha.invalid">
+                        Guardar
+                    </button>
+                </div>
+            </form>
+         
+        </div>
+    </mat-card-content>
+</mat-card>
+</div>

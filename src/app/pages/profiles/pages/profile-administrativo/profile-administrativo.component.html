@@ -1,0 +1,169 @@
+<app-loading-spinner [isLoading]="isLoading"></app-loading-spinner>
+<mat-card class="cardWithShadow">
+    <mat-card-header>
+        <mat-card-title>Documentación Administrativo</mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content>
+        <div class="row justify-content-center">
+            <form class="p-20" [formGroup]="FormFilesAdministrativo">
+                <mat-form-field class="col-md-3 col-6" *ngIf="!isDatosAdministrativo">
+                    <mat-label>Acta de Nacimiento</mat-label>
+                    <input matInput formControlName="chrActaNacimiento" placeholder="Acta de Nacimiento">
+                    <div class="file-upload__container" (dragover)="onDragOver($event)"
+                        (drop)="onDrop($event, 'chrActaNacimiento')">
+                        <input type="file" (change)="onFileSelected($event, 'chrActaNacimiento')"
+                            class="file-upload__input" #fileInput>
+                        <div class="file-upload__drag-area">
+                            Arrastra y suelta aqui o haz clic para seleccionar un archivo
+                        </div>
+                    </div>
+                </mat-form-field>
+
+                <mat-form-field class="col-md-3 col-6" *ngIf="!isDatosAdministrativo">
+                    <mat-label>INE</mat-label>
+                    <input matInput formControlName="chrIne" placeholder="INE">
+                    <div class="file-upload__container" (dragover)="onDragOver($event)"
+                        (drop)="onDrop($event, 'chrIne')">
+                        <input type="file" (change)="onFileSelected($event, 'chrIne')" class="file-upload__input"
+                            #fileInput>
+                        <div class="file-upload__drag-area">
+                            Arrastra y suelta aqui o haz clic para seleccionar un archivo
+                        </div>
+                    </div>
+                </mat-form-field>
+
+
+                <mat-form-field class="col-md-3 col-6" *ngIf="!isDatosAdministrativo">
+                    <mat-label>CURP</mat-label>
+                    <input matInput formControlName="chrCurp" placeholder="CURP">
+                    <div class="file-upload__container" (dragover)="onDragOver($event)"
+                        (drop)="onDrop($event, 'chrCurp')">
+                        <input type="file" (change)="onFileSelected($event, 'chrCurp')" class="file-upload__input"
+                            #fileInput>
+                        <div class="file-upload__drag-area">
+                            Arrastra y suelta aquí o haz clic para seleccionar un archivo
+                        </div>
+                    </div>
+                </mat-form-field>
+
+                <mat-form-field class="col-md-3 col-6" *ngIf="!isDatosAdministrativo">
+                    <mat-label>RFC</mat-label>
+                    <input matInput formControlName="chrRfc" placeholder="RFC">
+                    <div class="file-upload__container" (dragover)="onDragOver($event)"
+                        (drop)="onDrop($event, 'chrRfc')">
+                        <input type="file" (change)="onFileSelected($event, 'chrRfc')" class="file-upload__input"
+                            #fileInput>
+                        <div class="file-upload__drag-area">
+                            Arrastra y suelta aquí o haz clic para seleccionar un archivo
+                        </div>
+                    </div>
+                </mat-form-field>
+                <!--  <mat-checkbox formControlName="ischrCurriculum">Justificante</mat-checkbox> -->
+
+                <mat-form-field class="col-md-3 col-6" *ngIf="!isDatosAdministrativo">
+                    <mat-label>Constancia de situación fiscal</mat-label>
+                    <input matInput formControlName="chrConstanciaSituacionFiscal" placeholder="Título">
+                    <div class="file-upload__container" (dragover)="onDragOver($event)"
+                        (drop)="onDrop($event, 'chrConstanciaSituacionFiscal')">
+                        <input type="file" (change)="onFileSelected($event, 'chrConstanciaSituacionFiscal')"
+                            class="file-upload__input" #fileInput>
+                        <div class="file-upload__drag-area">
+                            Arrastra y suelta aquí o haz clic para seleccionar un archivo
+                        </div>
+                    </div>
+                    <!--    <mat-checkbox formControlName="ischrTitulo">Justificante</mat-checkbox> -->
+                </mat-form-field>
+
+                <mat-form-field class="col-md-3 col-6" *ngIf="!isDatosAdministrativo">
+                    <mat-label>Clabe bancaria</mat-label>
+                    <input matInput formControlName="chrClabeBancaria" placeholder="Cedula Profesional">
+                    <div class="file-upload__container" (dragover)="onDragOver($event)"
+                        (drop)="onDrop($event, 'chrClabeBancaria')">
+                        <input type="file" (change)="onFileSelected($event, 'chrClabeBancaria')"
+                            class="file-upload__input" #fileInput>
+                        <div class="file-upload__drag-area">
+                            Arrastra y suelta aquí o haz clic para seleccionar un archivo
+                        </div>
+                    </div>
+                    <!--   <mat-checkbox formControlName="ischrCedula">Justificante</mat-checkbox>-->
+                </mat-form-field>
+
+                <mat-form-field class="col-md-3 col-6" *ngIf="!isDatosAdministrativo">
+                    <mat-label>Comprobante de domicilio</mat-label>
+                    <input matInput formControlName="chrComprobanteDomicilio" placeholder="Comprobante de ingresos">
+                    <div class="file-upload__container" (dragover)="onDragOver($event)"
+                        (drop)="onDrop($event, 'chrComprobanteDomicilio')">
+                        <input type="file" (change)="onFileSelected($event, 'chrComprobanteDomicilio')"
+                            class="file-upload__input" #fileInput>
+                        <div class="file-upload__drag-area">
+                            Arrastra y suelta aquí o haz clic para seleccionar un archivo
+                        </div>
+                    </div>
+                    <!--    <mat-checkbox formControlName="ischrComprobanteIngresos">Justificante</mat-checkbox> -->
+                </mat-form-field>
+
+                <mat-form-field class="col-md-3 col-6" *ngIf="!isDatosAdministrativo">
+                    <mat-label>Número de seguridad social</mat-label>
+                    <input matInput formControlName="chrNss" placeholder="Número de seguridad social">
+                    <div class="file-upload__container" (dragover)="onDragOver($event)"
+                        (drop)="onDrop($event, 'chrNss')">
+                        <input type="file" (change)="onFileSelected($event, 'chrNss')" class="file-upload__input"
+                            #fileInput>
+                        <div class="file-upload__drag-area">
+                            Arrastra y suelta aquí o haz clic para seleccionar un archivo
+                        </div>
+                    </div>
+                </mat-form-field>
+
+                <mat-form-field class="col-md-3 col-6" *ngIf="!isDatosAdministrativo">
+                    <mat-label>Curriculum</mat-label>
+                    <input matInput formControlName="chrCurriculum" placeholder="Curriculum">
+                    <div class="file-upload__container" (dragover)="onDragOver($event)"
+                        (drop)="onDrop($event, 'chrCurriculum')">
+                        <input type="file" (change)="onFileSelected($event, 'chrCurriculum')" class="file-upload__input"
+                            #fileInput>
+                        <div class="file-upload__drag-area">
+                            Arrastra y suelta aquí o haz clic para seleccionar un archivo
+                        </div>
+                    </div>
+                </mat-form-field>
+            </form>
+        </div>
+
+        <div class="archivos-container" *ngIf="isDatosAdministrativo">
+            <div class="archivo-card" *ngFor="let archivo of lstArchivosAdmin">
+                <div class="archivo-icon">
+                    <mat-icon>insert_drive_file</mat-icon>
+                </div>
+
+                <div class="archivo-desc" matTooltip="{{archivo.descripcion}} - {{archivo.fecha}} - {{archivo.hora}} - {{archivo.estado}}">
+                    <a [href]="getGoogleDriveUrl(archivo.ruta)" target="_blank" class="archivo-link">
+                        {{archivo.nombre}} ({{archivo.tipo}}, {{archivo.tamano}})
+                    </a>
+                    <p class="archivo-meta">{{archivo.fecha}} {{archivo.hora}} - {{archivo.usuario}}</p>
+                    <div class="archivo-actions">
+                        <button mat-button (click)="editarArchivo(archivo)">
+                            <mat-icon>edit</mat-icon>
+                        </button>
+                        <button mat-button (click)="descargarArchivo(archivo)">
+                            <mat-icon>cloud_download</mat-icon>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--BOTONES AL FINAL Y PEGADOS A LA DERECHA-->
+        <div class="d-flex justify-content-end">
+            <button class="mx-1" mat-stroked-button color="primary" (click)="guardarArchivosAdmin()" *ngIf="!isDatosAdministrativo" [disabled]="!FormFilesAdministrativo.valid">
+                Subir archivos
+                <mat-icon>save</mat-icon>
+            </button>
+            <button class="mx-1" mat-stroked-button color="warn">
+                Limpiar
+                <mat-icon>close</mat-icon>
+            </button>
+        </div>
+    </mat-card-content>
+</mat-card>

@@ -1,0 +1,44 @@
+<h2 mat-dialog-title>Carrito</h2>
+
+<div mat-dialog-content class="carrito-content">
+  <div *ngIf="carrito.length === 0">
+    <p>No hay productos en el carrito.</p>
+  </div>
+  <div *ngIf="carrito.length > 0">
+    <mat-list>
+      <mat-list-item *ngFor="let item of productosAgrupados; let i = index" class="carrito-item">
+        <!-- Contenedor para la imagen y detalles -->
+        <div class="carrito-info">
+          <div class="carrito-image-container">
+            <img [src]="item.producto.rutaImagen" alt="{{ item.producto.nombre }}" class="carrito-image">
+          </div>
+          <div class="carrito-details">
+            <h4 mat-line>{{ item.producto.nombre }}</h4>
+            <div class="carrito-price-container">
+              <span mat-line>${{ item.producto.precio * item.cantidad }}</span> <!-- Precio total basado en la cantidad -->
+              <div class="carrito-quantity-controls">
+                <button mat-icon-button (click)="decrementarCantidad(i)" [disabled]="item.cantidad <= 1">
+                  <mat-icon>remove</mat-icon>
+                </button>
+                <span class="quantity">{{ item.cantidad }}</span> <!-- Cantidad -->
+                <button mat-icon-button (click)="incrementarCantidad(i)">
+                  <mat-icon>add</mat-icon>
+                </button>
+              </div>
+              <button mat-icon-button color="warn" (click)="eliminarProducto(item.producto)">
+                <mat-icon>delete</mat-icon>
+              </button>
+            </div>
+          </div>
+        </div>
+      </mat-list-item>
+    </mat-list>
+  </div>
+</div>
+
+<div mat-dialog-actions>
+  <div mat-dialog-actions>
+    <button mat-button (click)="comprar()">Comprar</button>
+    <button mat-button mat-dialog-close>Cerrar</button>
+  </div>
+</div>

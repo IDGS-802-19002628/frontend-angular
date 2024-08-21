@@ -1,0 +1,96 @@
+<app-loading-spinner [isLoading]="isLoading"></app-loading-spinner>
+<mat-card class="cardWithShadow">
+    <!--CARD CON IMG DE PRUEBA -->
+    <mat-card>
+        <mat-card-header>
+            <mat-card-title>Mi Perfil</mat-card-title>
+            <mat-card-subtitle>Información de mi perfil</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+            <div class="row">                
+                    <!--subir imagen-->
+                    <div class="col-md-3 col-12 mt-4">
+                        <div class="d-flex justify-content-center">
+                            <img src="/assets/images/profile/usuario.png" alt="profile" width="250">
+                        </div>
+                        <input type="file"class="file-upload__input" #fileInput matTooltip="Cambiar imagen" />
+                    </div>
+                    <div class="col-md-9 col-12 row">
+                        <form [formGroup]="userTipoForm">
+                           
+                        <mat-form-field class="col-md-4 col-12">
+                            <mat-label class="m-t-12">Clave</mat-label>
+                            <input matInput placeholder="Clave" formControlName="chrClave"/>
+                        </mat-form-field>
+    
+
+                        <mat-form-field class="col-md-4 col-12">
+                            <mat-label class="m-t-12">Contraseña</mat-label>
+                            <input matInput placeholder="Contraseña" formControlName="chrPasswordNew" type="password" [placeholder]="contrasenaNueva" />
+                            <button mat-icon-button matSuffix tabindex="-1" (click)="habilitarPassword();" *ngIf="!passwordEnabled" matTooltip="Cambiar contraseña">
+                                <mat-icon matPasswordToggle>edit</mat-icon>
+                            </button>
+                        </mat-form-field>
+
+                        <mat-form-field class="col-md-4 col-12">
+                            <mat-label class="m-t-12">Status</mat-label>
+                            <input matInput placeholder="Status" formControlName="chrStatus" />
+                        </mat-form-field>
+
+
+                        <mat-form-field class="col-md-4 col-12 offset-md-4"  [hidden]="!mostrarInput">
+                            <mat-label class="m-t-12">Contraseña anterior</mat-label>
+                            <input matInput placeholder="Confirmar Contraseña" formControlName="chrPasswordOld" type="password"/>
+                        </mat-form-field>
+
+    
+                        <mat-form-field class="col-md-12 col-12">
+                            <mat-label class="m-t-12">Nombre  Completo</mat-label>
+                            <input matInput placeholder="Nombre" formControlName="chrNombre" />
+                        </mat-form-field>
+    
+                        <mat-form-field class="col-md-4 col-12">
+                            <mat-label class="m-t-12">Fecha de Nacimiento</mat-label>
+                            <input matInput [matDatepicker]="picker2" placeholder="Fecha de Nacimiento" formControlName="dtFechaNacimiento">
+                            <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                            <mat-datepicker #picker2></mat-datepicker>
+                        </mat-form-field>
+    
+                        <mat-form-field class="col-md-4 col-12">
+                            <mat-label class="m-t-12">Teléfono</mat-label>
+                            <input matInput placeholder="Teléfono" formControlName="chrTelefono" />
+                        </mat-form-field>
+    
+                        <mat-form-field class="col-md-4 col-12">
+                            <mat-label class="m-t-12">Correo electronico</mat-label>
+                            <input matInput placeholder="Correo Electrónico" formControlName="chrEmail" />
+                        </mat-form-field>
+    
+                        <mat-form-field class="col-md-12 col-12">
+                            <mat-label class="m-t-12">Domicilio</mat-label>
+                            <input matInput placeholder="Domicilio" formControlName="chrDomicilio" />
+                        </mat-form-field>
+    
+    
+                        <mat-form-field class="col-md-6 col-12">
+                            <mat-label class="m-t-12">RFC</mat-label>
+                            <input matInput placeholder="RFC" formControlName="chrRFC" />
+                        </mat-form-field>
+    
+                        <mat-form-field class="col-md-6 col-12">
+                            <mat-label class="m-t-12">CURP</mat-label>
+                            <input matInput placeholder="CURP" formControlName="chrCurp" />
+                        </mat-form-field> 
+                    </form>
+
+                    <div class="col-md-12 col-6 d-flex justify-content-end">
+                        <button mat-raised-button color="primary" [disabled]="!userTipoForm.valid" (click)="updatePassword()">Guardar</button>
+                    </div>
+                 </div>
+            </div>
+        </mat-card-content>
+    </mat-card>
+    <div class="p-3">
+        <router-outlet></router-outlet>
+    </div>
+</mat-card>

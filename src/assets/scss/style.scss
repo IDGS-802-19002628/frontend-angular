@@ -1,0 +1,81 @@
+@use "@angular/material" as mat;
+@include mat.core();
+
+@import "variables";
+@import "layouts/transitions";
+@import "helpers/color";
+@import "helpers/icon-size";
+
+//Theme colors
+
+@import "themecolors/default_theme";
+@include mat.all-component-themes($bluetheme);
+
+//container layout
+@import "overrides/materialoverrides";
+@import "container";
+@import "layouts/layouts";
+@import "grid/grid";
+@import "helpers/custom-flex";
+@import "helpers/index";
+
+
+// pages
+@import "pages/dashboards";
+@import "pages/auth";
+
+//con todas las columnas de angular material hacer que no se corte el texto y se muestre completo en el tooltip
+
+mat-table {
+    width: max-content;
+}
+
+mat-cell {
+    white-space: normal;
+    word-wrap: break-word;
+    word-break: break-all;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    font-size: small !important;
+
+}
+
+mat-header-cell {
+   font-size: small !important;
+}
+
+
+.mat-column-no {
+    width: 50px;
+    min-width: 50px;
+    max-width: 50px;
+
+}
+
+.mat-column-select {
+    width: 70px;
+    min-width: 70px;
+    max-width: 70px;
+
+}
+
+
+.tablericon {
+    color:$primary;
+    font-size: 20px;
+    margin: auto;
+    cursor: pointer;
+    transition: all 0.3s;
+    &:hover {
+        transform: scale(1.2);
+    }
+    
+
+}
+
+
+
+
+
+

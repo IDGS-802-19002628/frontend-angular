@@ -1,0 +1,25 @@
+/* Asegúrate de que el botón del carrito esté posicionado de manera fija en la pantalla */
+.fixed-cart-button {
+    position: fixed; /* Usa fixed para que el botón se mantenga en la pantalla */
+    bottom: 16px; /* Ajusta el espacio desde el borde inferior según sea necesario */
+    right: 16px; /* Ajusta el espacio desde el borde derecho según sea necesario */
+    z-index: 1000; /* Asegura que el botón esté encima de otros elementos */
+    background-color: #f5f5f5; /* Color de fondo para asegurarse de que el botón sea visible */
+    border-radius: 50%; /* Hace que el botón sea circular */
+}
+
+/* Estilos para el badge que muestra la cantidad de productos en el carrito */
+.badge-cart {
+    color: white; /* Color del texto del badge */
+    background-color: red; /* Color de fondo del badge */
+    padding: 2px 6px;
+    border-radius: 50%;
+    font-size: 12px;
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    font-weight: bold;
+    display: inline-block;
+    min-width: 20px;
+    text-align: center;
+}

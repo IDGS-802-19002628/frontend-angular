@@ -1,0 +1,485 @@
+<app-loading-spinner [isLoading]="isLoading"></app-loading-spinner>
+
+<mat-card class="cardWithShadow theme-card">
+  <mat-card-content class="b-t-1">
+    <div class="row">
+      <div class="col-lg-12 col-sm-12">
+        <mat-card class="b-1 shadow-none">
+          <mat-card-header>
+            <mat-card-title>{{ title }}</mat-card-title>
+          </mat-card-header>
+          <mat-card-content class="b-t-1">
+            <mat-stepper [linear]="isLinear" #stepper>
+              <mat-step [stepControl]="firstFormGroup" label="DATOS PERSONALES">
+                <div class="row">
+                  <mat-card>
+                    <mat-card-header>
+                      <mat-card-title>Datos Personales</mat-card-title>
+                      <mat-card-subtitle>{{ date }}</mat-card-subtitle>
+                    </mat-card-header>
+                    <mat-card-content> 
+                      <form [formGroup]="firstFormGroup">
+                        <mat-form-field class="col-md-4 col-6">
+                          <mat-label>Nombres</mat-label>
+                          <input matInput placeholder="Nombres" formControlName="nombre" />
+                        </mat-form-field>
+                        <mat-form-field class="col-md-4 col-6">
+                          <mat-label>Apellido Paterno</mat-label>
+                          <input matInput placeholder="Apellido Paterno" formControlName="apellidoPaterno" />
+                        </mat-form-field>
+                        <mat-form-field class="col-md-4">
+                          <mat-label>Apellido Materno</mat-label>
+                          <input matInput placeholder="Apellido Materno" formControlName="apellidoMaterno" />
+                        </mat-form-field>
+
+                        <mat-form-field class="col-md-12 mb-2">
+                          <mat-label>CURP</mat-label>
+                          <mat-hint><a href="https://www.gob.mx/curp/" target="_blank">Consultar CURP</a></mat-hint>
+                          <input matInput placeholder="CURP" formControlName="curp" />
+                        </mat-form-field>
+
+                        <mat-form-field class="col-md-4 col-6">
+                          <mat-label>Sexo</mat-label>
+                          <mat-select formControlName="sexo" required>
+                            <mat-option *ngFor="let sexo of sexos" [value]="sexo.value">
+                              {{ sexo.viewValue }}
+                            </mat-option>
+                          </mat-select>
+                        </mat-form-field>
+
+                        <mat-form-field class="col-md-4 col-6">
+                          <mat-label>Tipo de Sangre</mat-label>
+                          <mat-select formControlName="tipoSangre" required>
+                            <mat-option *ngFor="let tipoSangre of tipoSangre" [value]="tipoSangre.value">
+                              {{ tipoSangre.viewValue }}
+                            </mat-option>
+                          </mat-select>
+                        </mat-form-field>
+
+                        <mat-form-field class="col-md-4">
+                          <mat-label>Estado Civil</mat-label>
+                          <mat-select formControlName="estadoCivil" required>
+                            <mat-option *ngFor="let estadoCivil of estadosCiviles" [value]="estadoCivil.value">
+                              {{ estadoCivil.viewValue }}
+                            </mat-option>
+                          </mat-select>
+                        </mat-form-field>
+
+                        <mat-form-field class="col-md-12">
+                          <mat-label>Fecha de Nacimiento</mat-label>
+                          <input matInput [matDatepicker]="picker" formControlName="fechaNacimiento" />
+                          <mat-hint>MM/DD/YYYY</mat-hint>
+                          <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                          <mat-datepicker #picker></mat-datepicker>
+                        </mat-form-field>
+
+                        <mat-form-field class="col-md-6">
+                          <mat-label>Luagr de Nacimiento</mat-label>
+                          <input matInput placeholder="Lugar de Nacimiento" formControlName="lugarNacimiento" />
+                        </mat-form-field>
+                        <mat-form-field class="col-md-6">
+                          <mat-label>Domicilio</mat-label>
+                          <mat-hint>(Calle, número y colonia)</mat-hint>
+                          <input matInput placeholder="Domicilio" formControlName="domicilio" />
+                        </mat-form-field>
+                        <mat-form-field class="col-md-6">
+                          <mat-label>Código Postal</mat-label>
+                          <input matInput placeholder="Código Postal" formControlName="cp" (change)="getDataByCP()" />
+                        </mat-form-field>
+                        <mat-form-field class="col-md-6">
+                          <mat-label>Colonia</mat-label>
+                          <mat-select formControlName="colonia" required>
+                            <mat-option *ngFor="let colonia of lstUbicaciones" [value]="colonia.asentamiento">
+                              {{ colonia.asentamiento }}
+                            </mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                        <mat-form-field class="col-md-6">
+                          <mat-label>Ciudad</mat-label>
+                          <input matInput placeholder="Ciudad" formControlName="ciudad" />
+                        </mat-form-field>
+                        <mat-form-field class="col-md-6">
+                          <mat-label>Entidad Federativa</mat-label>
+                          <input matInput placeholder="Entidad Federativa" formControlName="entidadFederativa" />
+                        </mat-form-field>
+
+                        <mat-form-field class="col-md-6 col-6">
+                          <mat-label>Teléfono Celular</mat-label>
+                          <input matInput placeholder="Teléfono Celular" formControlName="telefonoCelular" />
+                        </mat-form-field>
+                        <mat-form-field class="col-md-6 col-6">
+                          <mat-label>Teléfono Casa</mat-label>
+                          <input matInput placeholder="Teléfono Casa" formControlName="telefonoCasa" />
+                        </mat-form-field>
+                        <mat-form-field class="col-md-12">
+                          <mat-label>Correo Electrónico</mat-label>
+                          <input matInput placeholder="Correo Electrónico" formControlName="correoElectronico" />
+                        </mat-form-field>
+                          <mat-form-field class="col-md-4">
+                            <mat-label>Tienes alguna Discapacidad</mat-label>
+                            <mat-select formControlName="tienesDiscapacidad" required>
+                              <mat-option *ngFor="let discapacidad of discapacidades" [value]="discapacidad.value">
+                                {{ discapacidad.viewValue }}
+                              </mat-option>
+                            </mat-select>
+                          </mat-form-field>
+                          <mat-form-field class="col-md-4">
+                            <mat-label>Tienes alguna Enfermedad Crónica</mat-label>
+                            <input matInput formControlName="enfermedadCronica" />
+                            <mat-hint>Especifica</mat-hint>
+                          </mat-form-field>
+                          <mat-form-field class="col-md-4">
+                            <mat-label>Pertences a un Grupo Minoritario</mat-label>
+                            <input matInput formControlName="grupoMinoritario" />
+                            <mat-hint>Especifica</mat-hint>
+                          </mat-form-field>
+                          <mat-form-field class="col-md-12">
+                            <mat-label>Con quién vives</mat-label>
+                            <mat-select formControlName="conQuienVives" required>
+                              <mat-option *ngFor="let vive of dondeVives" [value]="vive.value">
+                                {{ vive.viewValue }}
+                              </mat-option>
+                            </mat-select>
+                          </mat-form-field>
+
+                      </form>
+                      <div class="d-flex justify-content-end">
+                        <button class="mr-2" mat-raised-button color="primary" matStepperNext
+                          [disabled]="!firstFormGroup.valid">
+                          <mat-icon>keyboard_arrow_right</mat-icon>
+                          Siguiente
+                        </button>
+                      </div>
+                    </mat-card-content>
+                  </mat-card>
+                </div>
+              </mat-step>
+              <mat-step [stepControl]="secondFormGroup" label="DATOS DE LA EMPRESA DONDE LABORA">
+
+                <mat-card>
+                  <mat-card-header>
+                    <mat-card-title>Datos de la Empresa</mat-card-title>
+                  </mat-card-header>
+                  <mat-card-content>
+                    <form [formGroup]="secondFormGroup">
+                      <mat-form-field class="col-md-12">
+                        <mat-label>Trabajas</mat-label>
+                        <mat-select formControlName="trabajas" required (selectionChange)="changeTrabajas($event)">
+                          <mat-option value="si">Si</mat-option>
+                          <mat-option value="no">No</mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                      <mat-form-field class="col-md-6 col-6">
+                        <mat-label>Nombre de la Empresa</mat-label>
+                        <input matInput placeholder="Empresa" formControlName="empresa" />
+                      </mat-form-field>
+                      <mat-form-field class="col-md-6 col-6">
+                        <mat-label>Puesto que Desempeñas</mat-label>
+                        <input matInput placeholder="Puesto" formControlName="puesto" />
+                      </mat-form-field>
+                      <mat-form-field class="col-md-6">
+                        <mat-label>Sector</mat-label>
+                        <input matInput placeholder="Sector" formControlName="sector" />
+                      </mat-form-field>
+                      <mat-form-field class="col-md-6">
+                        <mat-label>Dirección de la Empresa</mat-label>
+                        <mat-hint>(Calle, número y colonia)</mat-hint>
+                        <input matInput placeholder="Dirección" formControlName="direccion" />
+                      </mat-form-field>
+                      <mat-form-field class="col-md-6">
+                        <mat-label>Código Postal</mat-label>
+                        <input matInput placeholder="Código Postal" formControlName="codigoPostal"
+                          (change)="getDataByCPEmpresa()" />
+                      </mat-form-field>
+                      <mat-form-field class="col-md-6">
+                        <mat-label>Colonia</mat-label>
+                        <mat-select formControlName="colonia" required>
+                          <mat-option *ngFor="let colonia of lstUbicaciones" [value]="colonia.asentamiento">
+                            {{ colonia.asentamiento }}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                      <mat-form-field class="col-md-4">
+                        <mat-label> Ciudad</mat-label>
+                        <input matInput placeholder="Ciudad de la Empresa" formControlName="ciudadEmpresa" />
+                      </mat-form-field>
+                      <mat-form-field class="col-md-4 col-6">
+                        <mat-label>Horario</mat-label>
+                        <mat-hint>Ejemplo: 8:00 a 17:00</mat-hint>
+                        <input matInput placeholder="Horario" formControlName="horario" />
+                      </mat-form-field>
+                      <mat-form-field class="col-md-4 col-6">
+                        <mat-label>Teléfono de la Empresa</mat-label>
+                        <input matInput placeholder="Teléfono de la Empresa" formControlName="telefonoEmpresa" />
+                      </mat-form-field>
+                    </form>
+                    <div class="d-flex justify-content-end">
+                      <button class="mx-3" mat-raised-button color="primary" matStepperPrevious>
+                        <mat-icon>keyboard_arrow_left</mat-icon>
+                        Anterior
+                      </button>
+                      <button class="mr-2" mat-raised-button color="primary" matStepperNext
+                        [disabled]="!secondFormGroup.valid">
+                        <mat-icon>keyboard_arrow_right</mat-icon>
+                        Siguiente
+                      </button>
+                    </div>
+                  </mat-card-content>
+                </mat-card>
+
+              </mat-step>
+              <mat-step [stepControl]="thirdFormGroup" label="DATOS DE PADRES DE FAMILIA">
+              
+                    <form [formGroup]="thirdFormGroup">
+                      <mat-form-field class="col-md-12">
+                        <mat-label>Dependes Económicamente de tus Padres</mat-label>
+                        <mat-select formControlName="dependesEconomicamenteDePadres" required>
+                          <mat-option value="si">Si</mat-option>
+                          <mat-option value="no">No</mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                      <br>
+                      <div *ngIf="dependesEconomicamenteDePadres">
+                        <mat-accordion>
+                          <mat-expansion-panel expanded="true">
+                            <mat-expansion-panel-header>
+                              <mat-panel-title>
+                                Datos del Padre o Tutor
+                              </mat-panel-title>
+                              <mat-panel-description>
+                                Ingrese los datos del Padre o Tutor
+                              </mat-panel-description>
+                            </mat-expansion-panel-header>
+
+                            <mat-form-field class="col-md-12 col-12">
+                              <mat-label>Nombre del Padre</mat-label>
+                              <input matInput placeholder="Nombre del Padre" formControlName="nombrePadre" />
+                            </mat-form-field>
+                            <mat-form-field class="col-md-4 col-12">
+                              <mat-label>Trabaja</mat-label>
+                              <mat-select formControlName="trabajaPadre" required (selectionChange)="changeTrabajaPadre($event)">
+                                <mat-option value="si">Si</mat-option>
+                                <mat-option value="no">No</mat-option>
+                              </mat-select>
+                            </mat-form-field>
+                              <mat-form-field class="col-md-4 col-12">
+                                <mat-label>Estado</mat-label>
+                                <mat-select formControlName="estadoEmpresaPadre" required (selectionChange)="changeEstadoEmpresaPadre($event)">
+                                  <mat-option *ngFor="let estado of lstEstados" [value]="estado.clave">
+                                    {{ estado.estado }}
+                                  </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                            <mat-form-field class="col-md-4 col-12">
+                              <mat-label>Ciudad</mat-label>
+                              <mat-select formControlName="ciudadEmpresaPadre" required>
+                                <mat-option *ngFor="let ciudad of lstMunicipiosPadre" [value]="ciudad.clave">
+                                  {{ ciudad.municipio }}
+                                </mat-option>
+                              </mat-select>
+                            </mat-form-field>
+                            <mat-form-field class="col-md-6 col-6">
+                              <mat-label>Empresa</mat-label>
+                              <input matInput placeholder="Empresa" formControlName="empresaPadre" />
+                            </mat-form-field>
+                            <mat-form-field class="col-md-6 col-6">
+                              <mat-label>Puesto</mat-label>
+                              <input matInput placeholder="Puesto" formControlName="puestoPadre" />
+                            </mat-form-field>
+                            <mat-form-field class="col-md-6 col-12">
+                              <mat-label>Dirección de la Empresa</mat-label>
+                              <input matInput placeholder="Dirección de la Empresa"
+                                formControlName="direccionEmpresaPadre" />
+                            </mat-form-field>
+                          
+                            <mat-form-field class="col-md-6 col-12">
+                              <mat-label>Teléfono del padre o tutor</mat-label>
+                              <input matInput placeholder="Teléfono del padre o tutor"
+                                formControlName="telefonoPadre" />
+                            </mat-form-field>
+                          </mat-expansion-panel>
+                        </mat-accordion>
+                      </div>
+
+
+                      <br>
+                      <div *ngIf="dependesEconomicamenteDePadres">
+                        <mat-accordion>
+                          <mat-expansion-panel expanded="true">
+                            <mat-expansion-panel-header>
+                              <mat-panel-title>
+                                Datos de la Madre o Tutora
+                              </mat-panel-title>
+                              <mat-panel-description>
+                                Ingrese los datos de la Madre o Tutora
+                              </mat-panel-description>
+                            </mat-expansion-panel-header>
+
+                            <mat-form-field class="col-md-12 col-12">
+                              <mat-label>Nombre de la Madre</mat-label>
+                              <input matInput placeholder="Nombre de la Madre" formControlName="nombreMadre" />
+                            </mat-form-field>
+                            <mat-form-field class="col-md-4 col-12">
+                              <mat-label>Trabaja</mat-label>
+                              <mat-select formControlName="trabajaMadre" required (selectionChange)="changeTrabajaMadre($event)">
+                                <mat-option value="si">Si</mat-option>
+                                <mat-option value="no">No</mat-option>
+                              </mat-select>
+                            </mat-form-field>
+                            <mat-form-field class="col-md-4 col-12">
+                              <mat-label>Estado</mat-label>
+                              <mat-select formControlName="estadoEmpresaMadre" required (selectionChange)="changeEstadoEmpresaMadre($event)">
+                                <mat-option *ngFor="let estado of lstEstados" [value]="estado.clave">
+                                  {{ estado.estado }}
+                                </mat-option>
+                              </mat-select>
+                            </mat-form-field>
+
+                            <mat-form-field class="col-md-4 col-12">
+                              <mat-label>Ciudad</mat-label>
+                              <mat-select formControlName="ciudadEmpresaMadre" required>
+                                <mat-option *ngFor="let ciudad of lstMunicipiosMadre" [value]="ciudad.clave">
+                                  {{ ciudad.municipio }}
+                                </mat-option>
+                              </mat-select>
+                            </mat-form-field>
+
+                            <mat-form-field class="col-md-6 col-6">
+                              <mat-label>Empresa</mat-label>
+                              <input matInput placeholder="Empresa" formControlName="empresaMadre" />
+                            </mat-form-field>
+                            <mat-form-field class="col-md-6 col-6">
+                              <mat-label>Puesto</mat-label>
+                              <input matInput placeholder="Puesto" formControlName="puestoMadre" />
+                            </mat-form-field>
+                            <mat-form-field class="col-md-6 col-12">
+                              <mat-label>Dirección de la Empresa</mat-label>
+                              <input matInput placeholder="Dirección de la Empresa"
+                                formControlName="direccionEmpresaMadre" />
+                            </mat-form-field>
+                            
+                            <mat-form-field class="col-md-6 col-12">
+                              <mat-label>Teléfono de la madre o tutora</mat-label>
+                              <input matInput placeholder="Teléfono de la madre o tutora"
+                                formControlName="telefonoMadre" />
+                            </mat-form-field>
+                          </mat-expansion-panel>
+                        </mat-accordion>
+                      </div>
+                    </form>
+                    <br>
+                    <div class="d-flex justify-content-end">
+                      <button class="mx-3" mat-raised-button color="primary" matStepperPrevious>
+                        <mat-icon>keyboard_arrow_left</mat-icon>
+
+                        Anterior
+                      </button>
+                      <button class="mr-2" mat-raised-button color="primary" matStepperNext
+                        [disabled]="!thirdFormGroup.valid">
+                        <mat-icon>keyboard_arrow_right</mat-icon>
+                        Siguiente
+                      </button>
+                    </div>
+
+              </mat-step>
+              <mat-step [stepControl]="fourthFormGroup" label="DATOS DE ESCOLARIDAD">
+                <mat-card>
+                  <mat-card-header>
+                    <mat-card-title>Datos de Escolaridad</mat-card-title>
+                  </mat-card-header>
+                  <mat-card-content>
+                
+                <form [formGroup]="fourthFormGroup">
+                  <mat-form-field class="col-md-4 col-12">
+                    <mat-label>Campus</mat-label>
+                    <mat-select formControlName="campus" required (selectionChange)="changeCampus($event)">
+                      <mat-option *ngFor="let campus of lstEscuelas" [value]="campus.chrClave">
+                        {{ campus.chrNombre }}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                  <mat-form-field class="col-md-4 col-12">
+                    <mat-label>Licenciatura</mat-label>
+                    <mat-select formControlName="licenciatura" required>
+                      <mat-option *ngFor="let licenciatura of lstCurso" [value]="licenciatura.chrClave">
+                        {{ licenciatura.chrNombre }}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                  <mat-form-field class="col-md-4 col-12">
+                    <mat-label>Turno</mat-label>
+                    <mat-select formControlName="turno" required>
+                      <mat-option  *ngFor="let turno of lstTurnos" [value]="turno.chrClave">
+                        {{ turno.chrNombre }}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                  <mat-form-field class="col-md-6 col-6">
+                    <mat-label>Preparatoria de Egreso</mat-label>
+                    <input matInput placeholder="Preparatoria de Egreso" formControlName="preparatoriaEgreso" />
+                  </mat-form-field>
+                  <mat-form-field class="col-md-6 col-6">
+                    <mat-label>Dirección de la Preparatoria</mat-label>
+                    <input matInput placeholder="Dirección de la Preparatoria" formControlName="direccionPreparatoria" />
+                  </mat-form-field>
+
+                    <mat-form-field class="col-md-6 col-6">
+                      <mat-label>Modalidad de Estudio</mat-label>
+                      <mat-select formControlName="modalidadEstudioPreparatoria" required>
+                        <mat-option *ngFor="let modalidad of modalidadEstudioPreparatoria" [value]="modalidad.value">
+                          {{ modalidad.viewValue }}
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                    <mat-form-field class="col-md-6 col-6">
+                      <mat-label>Promedio General de la Preparatoria</mat-label>
+                      <input matInput placeholder="Promedio General de la Preparatoria" formControlName="promedioGeneralPreparatoria" type="number" min="0" max="10" step="0.1" />
+                    </mat-form-field>
+                    <mat-form-field class="col-md-4 col-6">
+                      <mat-label>Participaciones, Reconocimientos o Premios</mat-label>
+                      <input matInput placeholder="Participaciones, Reconocimientos o Premios" formControlName="participacionesReconocimientosPremios" />
+                    </mat-form-field>
+                    <mat-form-field class="col-md-4 col-6">
+                      <mat-label>Tenías Beca en la Preparatoria</mat-label>
+                      <mat-select formControlName="teniasBecaPrepa" required>
+                        <mat-option value="si">Si</mat-option>
+                        <mat-option value="no">No</mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                    <mat-form-field class="col-md-4 col-12">
+                      <mat-label>Tipo de Beca</mat-label>
+                      <mat-select formControlName="tipoBecaPrepa" required>
+                        <mat-option *ngFor="let tipoBeca of tipoBeca" [value]="tipoBeca.value">
+                          {{ tipoBeca.viewValue }}
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
+
+                  <div class="d-flex justify-content-end">
+                  <mat-checkbox class="mr-2"formControlName="terminosYCondiciones" required>
+                    <p style="font-size: x-small;"> {{ terminosInscripcion }} </p>
+
+                  </mat-checkbox>
+                  </div>
+                    </form>
+                    <br>
+                    <div class="d-flex justify-content-end">
+                      <button class="mx-2" mat-raised-button color="primary" matStepperPrevious>
+                        <mat-icon>keyboard_arrow_left</mat-icon>
+                        Anterior
+                      </button>
+                      <button class="mr-2" mat-raised-button color="primary"  (click)="saveInscripcion()" [disabled]="!fourthFormGroup.valid">
+                        <mat-icon>save</mat-icon>
+                        Guardar
+                      </button>
+                    </div>
+                  </mat-card-content>
+                  </mat-card>
+              </mat-step>
+            </mat-stepper>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </div>
+  </mat-card-content>
+</mat-card>

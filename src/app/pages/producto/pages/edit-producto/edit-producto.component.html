@@ -1,0 +1,83 @@
+<mat-card class="edit-producto-card">
+    <mat-card-header>
+      <mat-card-title>Editar Producto</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <form [formGroup]="productoForm" (ngSubmit)="guardarCambios()">
+        <div class="form-container">
+          
+          <mat-form-field appearance="fill" class="full-width">
+            <mat-label>Nombre</mat-label>
+            <input matInput formControlName="nombre" placeholder="Nombre" required>
+            <mat-error *ngIf="productoForm.get('nombre')?.hasError('required')">
+              El campo nombre es requerido.
+            </mat-error>
+          </mat-form-field>
+          
+          <mat-form-field appearance="fill" class="full-width">
+            <mat-label>Descripción</mat-label>
+            <input matInput formControlName="descripcion" placeholder="Descripción" required>
+            <mat-error *ngIf="productoForm.get('descripcion')?.hasError('required')">
+              El campo descripción es requerido.
+            </mat-error>
+          </mat-form-field>
+          
+          <mat-form-field appearance="fill" class="full-width">
+            <mat-label>Precio</mat-label>
+            <input matInput formControlName="precio" placeholder="Precio" required>
+            <mat-error *ngIf="productoForm.get('precio')?.hasError('required')">
+              El campo precio es requerido.
+            </mat-error>
+            <mat-error *ngIf="productoForm.get('precio')?.hasError('pattern')">
+              El precio debe ser un número válido.
+            </mat-error>
+          </mat-form-field>
+          
+          <mat-form-field appearance="fill" class="full-width">
+            <mat-label>Ruta de Imagen</mat-label>
+            <input matInput formControlName="rutaImagen" placeholder="Ruta de Imagen" required>
+            <mat-error *ngIf="productoForm.get('rutaImagen')?.hasError('required')">
+              El campo ruta de imagen es requerido.
+            </mat-error>
+          </mat-form-field>
+          
+          <mat-form-field appearance="fill" class="full-width">
+            <mat-label>Stock</mat-label>
+            <input matInput formControlName="stock" placeholder="Stock" required>
+            <mat-error *ngIf="productoForm.get('stock')?.hasError('required')">
+              El campo stock es requerido.
+            </mat-error>
+            <mat-error *ngIf="productoForm.get('stock')?.hasError('pattern')">
+              El stock debe contener solo números.
+            </mat-error>
+          </mat-form-field>
+          
+          <mat-form-field appearance="fill" class="full-width">
+            <mat-label>Categoría</mat-label>
+            <mat-select formControlName="idCategoria" placeholder="Seleccione una categoría" required>
+              <mat-option *ngFor="let categoria of categorias" [value]="categoria.idCategoria">
+                {{ categoria.nombre }}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="productoForm.get('idCategoria')?.hasError('required')">
+              El campo categoría es requerido.
+            </mat-error>
+          </mat-form-field>
+          
+          <div class="form-actions">
+            <button mat-raised-button color="primary" type="submit" [disabled]="productoForm.invalid">
+              Guardar Cambios
+            </button>
+            <button mat-raised-button color="accent" (click)="cancelar()">
+              Cancelar
+            </button>
+            <button mat-raised-button class="custom-red-button" (click)="eliminar()">
+              Eliminar
+            </button>
+          </div>
+          
+        </div>
+      </form>
+    </mat-card-content>
+  </mat-card>
+  

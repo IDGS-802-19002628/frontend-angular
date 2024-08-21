@@ -1,0 +1,80 @@
+<mat-toolbar class="topbar">
+  <!-- Mobile Menu -->
+  <button mat-icon-button (click)="toggleMobileNav.emit()">
+    <i-tabler name="menu-2" class="icon-20 d-flex"></i-tabler>
+  </button>
+
+
+           
+
+        
+            <ul class="list-route flex md:justify-content-end">
+               
+                <li>
+                    <mat-icon class="icon-breadcrumb">arrow_forward_ios</mat-icon>
+                    <span></span>
+                </li>
+            </ul>
+
+
+
+  <span class="flex-1-auto"></span>
+  <button mat-icon-button aria-label="Notifications" [matMenuTriggerFor]="notifications">
+    <i-tabler class="d-flex" name="bell" matBadge="{{numNotificaciones}}" matBadgeColor="warn" *ngIf="numNotificaciones > 0"></i-tabler>
+    <i-tabler class="d-flex" name="bell" *ngIf="numNotificaciones === 0"></i-tabler>
+  </button>
+  
+  <mat-menu #notifications="matMenu" xPosition="before" class="topbar-dd cardWithShadow">
+    <div class="p-x-12 p-y-8">
+      <h3 class="m-0">Notificaciones</h3>
+    </div>
+    <mat-divider></mat-divider>
+    <button mat-menu-item *ngFor="let notificacion of lstNotificaciones" (click)="marcarLeido(notificacion)">
+      <div class="d-flex align-items-center">
+        <div class="flex-1">
+          <h5 class="m-0">
+            <span class="bg-light-success text-success m-r-5" style="font-size: xx-small" *ngIf="notificacion.chrStatus == 1">New </span>
+            <span class="bg-light-danger text-danger m-r-5" style="font-size: xx-small" *ngIf="notificacion.chrStatus == 2">Urgent </span>
+            <span class="bg-light-warning text-warning m-r-5" style="font-size: xx-small" *ngIf="notificacion.chrStatus == 3">Important </span>
+            {{notificacion.chrTitulo}}
+          </h5>
+          <p class="m-0" style="font-size: smaller">{{notificacion.chrMensaje}}</p>
+        </div>
+        <div class="d-flex align-items-center">
+          <p class="m-0" style="font-size: xx-small"> {{notificacion.dtFecha}}</p>
+        </div>
+      </div>
+    </button>
+  </mat-menu>
+
+
+  <button
+    mat-icon-button
+    [matMenuTriggerFor]="profilemenu"
+    aria-label="Notifications" class="m-l-10"
+  >
+    <img
+      src="/assets/images/profile/user.jpg"
+      class="rounded-circle object-cover"
+      width="35"
+    />
+  </button>
+  <mat-menu #profilemenu="matMenu" xPosition="before" class="topbar-dd cardWithShadow">
+    <button mat-menu-item [routerLink]="['/profile']">
+      <mat-icon class="d-flex align-items-center"
+        ><i-tabler name="user" class="icon-18 d-flex"></i-tabler></mat-icon
+      >Mi cuenta
+    </button>
+    
+
+    <div class="p-x-12 m-t-12">
+      <a
+        (click)="logout()"
+        mat-flat-button
+        color="primary"
+        class="w-100"
+        >Logout</a
+      >
+    </div>
+  </mat-menu>
+</mat-toolbar>

@@ -1,0 +1,67 @@
+<div class="blank-layout-container justify-content-center align-items-center bg-light-primary">
+  <div
+    class="position-relative row w-100 h-100 bg-gredient justify-content-center"
+  >
+    <div class="col-lg-4 d-flex align-items-center">
+      <mat-card class="cardWithShadow boxed-auth">
+        <mat-card-content class="p-32">
+          <div class="text-center">
+            <a [routerLink]="['/dashboard']">
+              <img
+                src="./assets/images/logo.png"
+                class="align-middle m-2"
+                alt="logo"
+                style="width: 100px; height: 100px"
+              />
+            </a>
+          </div>
+
+       
+
+          <div class="or-border m-t-30">DESKART</div>
+
+          <form class="m-t-30" [formGroup]="loginForm">
+            <mat-label class="mat-subtitle-2 f-s-14 f-w-600 m-b-12 d-block" 
+              >Nombre de usuario</mat-label
+            >
+            <mat-form-field appearance="outline" class="w-100" color="primary">
+              <input matInput  formControlName="Email" />
+            </mat-form-field>
+            
+            <!-- password -->
+            <mat-label class="mat-subtitle-2 f-s-14 f-w-600 m-b-12 d-block"
+              >Contraseña</mat-label
+            >
+            <mat-form-field appearance="outline" class="w-100" color="primary">
+              <input matInput type="password" formControlName="Contrasenia" />
+            </mat-form-field>
+
+            <div class="d-flex align-items-center m-b-12">
+              <mat-checkbox color="primary">Recordarme</mat-checkbox>
+              <a
+                [routerLink]="['/']"
+                class="text-primary f-w-600 text-decoration-none m-l-auto f-s-14"
+                >Olvidaste tu contraseña?</a
+              >
+            </div>
+            <a mat-flat-button color="primary" class="w-100" (click)="login()" [disabled]="!loginForm.valid">
+              Iniciar Sesión
+            </a>
+            <!-- Error mesaje -->
+            <div class="text-center m-t-24">
+              <span class="text-warning" *ngIf="loginForm.errors"> Correo o Contraseña invalidos</span>
+            </div>
+            
+          </form>
+          <span class="d-block f-w-500 text-center m-t-24">
+            Necesitas ayuda?
+            <a class="text-decoration-none text-primary f-w-500 f-s-14" [routerLink]="['/authentication/register']">
+              Crear Cuenta </a>
+          </span>
+        </mat-card-content>
+        
+       
+      </mat-card>
+    </div>
+  </div>
+</div>

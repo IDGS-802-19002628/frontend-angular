@@ -1,0 +1,464 @@
+<app-loading-spinner [isLoading]="isLoading"></app-loading-spinner>
+<mat-card class="cardWithShadow">
+    <!--FECHA-->
+    <mat-card-header>
+        <mat-card-title>Detalle de inscripción</mat-card-title>
+        <mat-card-subtitle>Fecha: {{ fecha }}</mat-card-subtitle>
+    </mat-card-header>
+    
+    <mat-card-content class="pt-0">
+        <app-table-actions textBotonAdd="Agregar" [visibleBtnAdd]="false" (onExportPDF)="viewPdf()"></app-table-actions>
+
+        <mat-accordion class="w-100 m-t-12 p-24">
+            <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        <div class="d-flex w-100">
+                            <div class="flex-1-auto">Datos personales</div>
+                        </div>
+                    </mat-panel-title>
+                    <mat-panel-description>
+                        Datos personales del aspirante
+                    </mat-panel-description>
+
+                </mat-expansion-panel-header>
+                <div class="row">
+                    <form [formGroup]="firstFormGroup">
+                        <mat-form-field class="col-md-3 col-6">
+                            <mat-label>Nombre</mat-label>
+                            <input matInput formControlName="chrNombre" placeholder="Nombre">
+                        </mat-form-field>
+                        <mat-form-field class="col-md-3 col-6">
+                            <mat-label>Apellido paterno</mat-label>
+                            <input matInput formControlName="chrPaterno" placeholder="Apellido paterno">
+                        </mat-form-field>
+                        <mat-form-field class="col-md-3 col-6">
+                            <mat-label>Apellido materno</mat-label>
+                            <input matInput formControlName="chrMaterno" placeholder="Apellido materno">
+                        </mat-form-field>
+                        <mat-form-field class="col-md-3 col-6">
+                            <mat-label>Sexo</mat-label>
+                            <input matInput formControlName="chrSexo" placeholder="Sexo">
+                        </mat-form-field>
+                        <mat-form-field class="col-md-4 col-6">
+                            <mat-label>Tipo de sangre</mat-label>
+                            <input matInput formControlName="chrTipoSangre" placeholder="Tipo de sangre">
+                        </mat-form-field>
+                        <mat-form-field class="col-md-4 col-6">
+                            <mat-label>Estado civil</mat-label>
+                            <input matInput formControlName="chrEstadoCivil" placeholder="Estado civil">
+                        </mat-form-field>
+                        <mat-form-field class="col-md-4 col-6">
+                            <mat-label>Fecha de nacimiento</mat-label>
+                            <input matInput formControlName="dtFechaNacimiento" placeholder="Fecha de nacimiento">
+                        </mat-form-field>
+                        <mat-form-field class="col-md-3 col-6">
+                            <mat-label>Lugar de nacimiento</mat-label>
+                            <input matInput formControlName="chrLugarNacimiento" placeholder="Lugar de nacimiento">
+                        </mat-form-field>
+                        <mat-form-field class="col-md-3 col-6">
+                            <mat-label>Domicilio</mat-label>
+                            <input matInput formControlName="chrDomicilio" placeholder="Domicilio">
+                        </mat-form-field>
+                        <mat-form-field class="col-md-3 col-6">
+                            <mat-label>Colonia</mat-label>
+                            <input matInput formControlName="chrColonia" placeholder="Colonia">
+                        </mat-form-field>
+                        <mat-form-field class="col-md-3 col-6">
+                            <mat-label>Ciudad</mat-label>
+                            <input matInput formControlName="chrCiudad" placeholder="Ciudad">
+                        </mat-form-field>
+                        <mat-form-field class="col-md-4 col-6">
+                            <mat-label>Entidad federativa</mat-label>
+                            <input matInput formControlName="chrEntidadFederativa" placeholder="Entidad federativa">
+                        </mat-form-field>
+                        <mat-form-field class="col-md-4 col-6">
+                            <mat-label>Código postal</mat-label>
+                            <input matInput formControlName="chrCp" placeholder="Código postal">
+                        </mat-form-field>
+                        <mat-form-field class="col-md-4 col-6">
+                            <mat-label>Teléfono celular</mat-label>
+                            <input matInput formControlName="chrTelefonoCelular" placeholder="Teléfono celular">
+                        </mat-form-field>
+                        <mat-form-field class="col-md-6 col-6">
+                            <mat-label>Teléfono casa</mat-label>
+                            <input matInput formControlName="chrTelefonoCasa" placeholder="Teléfono casa">
+                        </mat-form-field>
+                        <mat-form-field class="col-md-6 col-6">
+                            <mat-label>Correo electrónico</mat-label>
+                            <input matInput formControlName="chrCorreoElectronico" placeholder="Correo electrónico">
+                        </mat-form-field>
+                    </form>
+                </div>
+            </mat-expansion-panel>
+        </mat-accordion>
+
+        <mat-accordion class="w-100 m-t-12 p-24">
+            <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        <div class="d-flex w-100">
+                            <div class="flex-1-auto">Datos laborales</div>
+                        </div>
+                    </mat-panel-title>
+                    <mat-panel-description>
+                        Datos laborales del aspirante
+                    </mat-panel-description>
+
+                </mat-expansion-panel-header>
+                <div class="row">
+                    <form [formGroup]="secondFormGroup">
+                        <mat-form-field class="col-md-3 col-6">
+                            <mat-label>Trabajas</mat-label>
+                            <input matInput formControlName="chrTrabajas" placeholder="Trabajas">
+                        </mat-form-field>
+                        <mat-form-field class="col-md-3 col-6">
+                            <mat-label>Empresa</mat-label>
+                            <input matInput formControlName="chrEmpresa" placeholder="Empresa">
+                        </mat-form-field>
+                        <mat-form-field class="col-md-3 col-6">
+                            <mat-label>Puesto</mat-label>
+                            <input matInput formControlName="chrPuesto" placeholder="Puesto">
+                        </mat-form-field>
+                        <mat-form-field class="col-md-3 col-6">
+                            <mat-label>Sector</mat-label>
+                            <input matInput formControlName="chrSector" placeholder="Sector">
+                        </mat-form-field>
+                        <mat-form-field class="col-md-4 col-6">
+                            <mat-label>Dirección</mat-label>
+                            <input matInput formControlName="chrDireccion" placeholder="Dirección">
+                        </mat-form-field>
+                        <mat-form-field class="col-md-4 col-6">
+                            <mat-label>Código postal</mat-label>
+                            <input matInput formControlName="chrCodigoPostal" placeholder="Código postal">
+                        </mat-form-field>
+                        <mat-form-field class="col-md-4 col-6">
+                            <mat-label>Colonia</mat-label>
+                            <input matInput formControlName="chrColoniaEmpresa" placeholder="Colonia">
+                        </mat-form-field>
+                        <mat-form-field class="col-md-4 col-6">
+                            <mat-label>Ciudad</mat-label>
+                            <input matInput formControlName="chrCiudadEmpresa" placeholder="Ciudad">
+                        </mat-form-field>
+                        <mat-form-field class="col-md-4 col-6">
+                            <mat-label>Horario</mat-label>
+                            <input matInput formControlName="chrHorario" placeholder="Horario">
+                        </mat-form-field>
+                        <mat-form-field class="col-md-4 col-6">
+                            <mat-label>Teléfono</mat-label>
+                            <input matInput formControlName="chrTelefonoEmpresa" placeholder="Teléfono">
+                        </mat-form-field>
+                    </form>
+                </div>
+            </mat-expansion-panel>
+        </mat-accordion>
+
+        <mat-accordion class="w-100 m-t-12 p-24">
+            <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        <div class="d-flex w-100">
+                            <div class="flex-1-auto">Datos de los padres</div>
+                        </div>
+                    </mat-panel-title>
+                    <mat-panel-description>
+                        Datos de los padres del aspirante
+                    </mat-panel-description>
+
+                </mat-expansion-panel-header>
+                <div class="row">
+                    <form [formGroup]="thirdFormGroup">
+                        <mat-form-field class="col-md-3 col-6">
+                            <mat-label>Dependes económicamente de tus padres</mat-label>
+                            <input matInput formControlName="chrDependesEconomicamenteDePadres"
+                                placeholder="Dependes económicamente de tus padres">
+                        </mat-form-field>
+                        <mat-form-field class="col-md-3 col-6">
+                            <mat-label>Nombre del padre</mat-label>
+                            <input matInput formControlName="chrNombrePadre" placeholder="Nombre del padre">
+                        </mat-form-field>
+                        <mat-form-field class="col-md-3 col-6">
+                            <mat-label>Trabaja</mat-label>
+                            <input matInput formControlName="chrTrabajaPadre" placeholder="Trabaja">
+                        </mat-form-field>
+                        <mat-form-field class="col-md-3 col-6">
+                            <mat-label>Empresa</mat-label>
+                            <input matInput formControlName="chrEmpresaPadre" placeholder="Empresa">
+                        </mat-form-field>
+                        <mat-form-field class="col-md-4 col-6">
+                            <mat-label>Puesto</mat-label>
+                            <input matInput formControlName="chrPuestoPadre" placeholder="Puesto">
+                        </mat-form-field>
+                        <mat-form-field class="col-md-4 col-6">
+                            <mat-label>Dirección</mat-label>
+                            <input matInput formControlName="chrDireccionEmpresaPadre" placeholder="Dirección">
+                        </mat-form-field>
+                        <mat-form-field class="col-md-4 col-6">
+                            <mat-label>Estado</mat-label>
+                            <input matInput formControlName="chrEstadoEmpresaPadre" placeholder="Estado">
+                        </mat-form-field>
+                        <mat-form-field class="col-md-6 col-6">
+                            <mat-label>Ciudad</mat-label>
+                            <input matInput formControlName="chrCiudadEmpresaPadre" placeholder="Ciudad">
+                        </mat-form-field>
+                        <mat-form-field class="col-md-6 col-6">
+                            <mat-label>Teléfono</mat-label>
+                            <input matInput formControlName="chrTelefonoPadre" placeholder="Teléfono">
+                        </mat-form-field>
+                        <mat-form-field class="col-md-3 col-6">
+                            <mat-label>Nombre de la madre</mat-label>
+                            <input matInput formControlName="chrNombreMadre" placeholder="Nombre de la madre">
+                        </mat-form-field>
+                        <mat-form-field class="col-md-3 col-6">
+                            <mat-label>Trabaja</mat-label>
+                            <input matInput formControlName="chrTrabajaMadre" placeholder="Trabaja">
+                        </mat-form-field>
+                        <mat-form-field class="col-md-3 col-6">
+                            <mat-label>Empresa</mat-label>
+                            <input matInput formControlName="chrEmpresaMadre" placeholder="Empresa">
+                        </mat-form-field>
+                        <mat-form-field class="col-md-3 col-6">
+                            <mat-label>Puesto</mat-label>
+                            <input matInput formControlName="chrPuestoMadre" placeholder="Puesto">
+                        </mat-form-field>
+                        <mat-form-field class="col-md-3 col-6">
+                            <mat-label>Dirección</mat-label>
+                            <input matInput formControlName="chrDireccionEmpresaMadre" placeholder="Dirección">
+                        </mat-form-field>
+                        <mat-form-field class="col-md-3 col-6">
+                            <mat-label>Estado</mat-label>
+                            <input matInput formControlName="chrEstadoEmpresaMadre" placeholder="Estado">
+                        </mat-form-field>
+                        <mat-form-field class="col-md-3 col-6">
+                            <mat-label>Ciudad</mat-label>
+                            <input matInput formControlName="chrCiudadEmpresaMadre" placeholder="Ciudad">
+                        </mat-form-field>
+                        <mat-form-field class="col-md-3 col-6">
+                            <mat-label>Teléfono</mat-label>
+                            <input matInput formControlName="chrTelefonoMadre" placeholder="Teléfono">
+                        </mat-form-field>
+                    </form>
+                </div>
+            </mat-expansion-panel>
+        </mat-accordion>
+
+        <mat-accordion class="w-100 m-t-12 p-24">
+            <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        <div class="d-flex w-100">
+                            <div class="flex-1-auto">Datos académicos</div>
+                        </div>
+                    </mat-panel-title>
+                    <mat-panel-description>
+                        Datos académicos del aspirante
+                    </mat-panel-description>
+              
+                </mat-expansion-panel-header>
+                <div class="row">
+                    <form [formGroup]="fourthFormGroup">
+                        <mat-form-field class="col-md-4 col-12">
+                            <mat-label>Campus</mat-label>
+                            <mat-select formControlName="chrClaveEscuela" required (selectionChange)="changeCampus($event)">
+                              <mat-option *ngFor="let campus of lstEscuelas" [value]="campus.chrClave">
+                                {{ campus.chrNombre }}
+                              </mat-option>
+                            </mat-select>
+                          </mat-form-field>
+                          <mat-form-field class="col-md-4 col-12">
+                            <mat-label>Licenciatura</mat-label>
+                            <mat-select formControlName="chrLicenciatura" required (selectionChange)="generarMatricula()">
+                              <mat-option *ngFor="let licenciatura of lstCurso" [value]="licenciatura.chrClave">
+                                {{ licenciatura.chrNombre }}
+                              </mat-option>
+                            </mat-select>
+                          </mat-form-field>
+                          <mat-form-field class="col-md-4 col-12">
+                            <mat-label>Turno</mat-label>
+                            <mat-select formControlName="chrClaveTurno" required>
+                              <mat-option  *ngFor="let turno of lstTurnos" [value]="turno.chrClave">
+                                {{ turno.chrNombre }}
+                              </mat-option>
+                            </mat-select>
+                          </mat-form-field>
+                          <mat-form-field class="col-md-6 col-6">
+                            <input matInput placeholder="Preparatoria de Egreso" formControlName="chrPreparatoriaEgreso" />
+                          </mat-form-field>
+                          <mat-form-field class="col-md-6 col-6">
+                            <input matInput placeholder="Dirección de la Preparatoria" formControlName="chrDireccionPreparatoria" />
+                          </mat-form-field>
+
+                    </form>
+                </div>
+            </mat-expansion-panel>
+        </mat-accordion>
+
+        <div class="row justify-content-center">
+            <form [formGroup]="fifthFormGroup">
+                <mat-form-field class="col-md-6 col-6">
+                    <mat-label>Matrícula</mat-label>
+                    <input matInput formControlName="chrMatricula" placeholder="Matrícula">
+                </mat-form-field>
+                <mat-form-field class="col-md-6 col-6" *ngIf="!isInscrito">
+                    <mat-label>RFC</mat-label>
+                    <input matInput formControlName="chrRFC" placeholder="RFC">
+                </mat-form-field>
+
+                <mat-form-field class="col-md-3 col-6" *ngIf="!isInscrito">
+                    <mat-label>Fotografía del Alumno</mat-label>
+                    <input matInput formControlName="chrFotografia" placeholder="Fotografía del Alumno">
+                    <div class="file-upload__container" (dragover)="onDragOver($event)"
+                        (drop)="onDrop($event, 'chrFotografia')">
+                        <input type="file" (change)="onFileSelected($event, 'chrFotografia')" class="file-upload__input"
+                            #fileInput accept="image/*">
+                        <div class="file-upload__drag-area">
+                            Arrastra y suelta aquí o haz clic para seleccionar un archivo
+                        </div>
+                    </div>
+                </mat-form-field> 
+                
+                <mat-form-field class="col-md-3 col-6" *ngIf="!isInscrito">
+                    <mat-label>Acta de nacimiento</mat-label>
+                    <input matInput formControlName="chrActaNacimiento" placeholder="Acta de nacimiento">
+                    <div class="file-upload__container" (dragover)="onDragOver($event)"
+                        (drop)="onDrop($event, 'chrActaNacimiento')">
+                        <input type="file" (change)="onFileSelected($event, 'chrActaNacimiento')"
+                            class="file-upload__input" #fileInput>
+                        <div class="file-upload__drag-area">
+                            Arrastra y suelta aquí o haz clic para seleccionar un archivo
+                        </div>
+                    </div>
+                    <mat-checkbox formControlName="ischrActaNacimiento">Justificante</mat-checkbox>
+
+                </mat-form-field>
+
+                <mat-form-field class="col-md-3 col-6" *ngIf="!isInscrito">
+                    <mat-label>Certificado de preparatoria</mat-label>
+                    <input matInput formControlName="chrCertificadoPreparatoria"
+                        placeholder="Certificado de preparatoria">
+                    <div class="file-upload__container" (dragover)="onDragOver($event)"
+                        (drop)="onDrop($event, 'chrCertificadoPreparatoria')">
+                        <input type="file" (change)="onFileSelected($event, 'chrCertificadoPreparatoria')"
+                            class="file-upload__input" #fileInput>
+                        <div class="file-upload__drag-area">
+                            Arrastra y suelta aquí o haz clic para seleccionar un archivo
+                        </div>
+                    </div>
+                    <mat-checkbox formControlName="ischrCertificadoPreparatoria">Justificante</mat-checkbox>
+                </mat-form-field>
+
+                <mat-form-field class="col-md-3 col-6" *ngIf="!isInscrito">
+                    <mat-label>CURP</mat-label>
+                    <input matInput formControlName="chrCurp" placeholder="CURP">
+                    <div class="file-upload__container" (dragover)="onDragOver($event)"
+                        (drop)="onDrop($event, 'chrCurp')">
+                        <input type="file" (change)="onFileSelected($event, 'chrCurp')"
+                            class="file-upload__input" #fileInput>
+                        <div class="file-upload__drag-area">
+                            Arrastra y suelta aquí o haz clic para seleccionar un archivo
+                        </div>
+                    </div>
+                    <mat-checkbox formControlName="ischrCurp">Justificante</mat-checkbox>
+                </mat-form-field>
+
+                <mat-form-field class="col-md-3 col-6" *ngIf="!isInscrito">
+                    <mat-label>Certificado médico de instituciones públicas</mat-label>
+                    <input matInput formControlName="chrCertificadoMedico" placeholder="Certificado médico de instituciones públicas">
+                    <div class="file-upload__container" (dragover)="onDragOver($event)"
+                        (drop)="onDrop($event, 'chrCertificadoMedico')">
+                        <input type="file" (change)="onFileSelected($event, 'chrCertificadoMedico')"
+                            class="file-upload__input" #fileInput>
+                        <div class="file-upload__drag-area">
+                            Arrastra y suelta aquí o haz clic para seleccionar un archivo
+                        </div>
+                    </div>
+                    <mat-checkbox formControlName="ischrCertificadoMedico">Justificante</mat-checkbox>
+                </mat-form-field>
+
+                <mat-form-field class="col-md-3 col-6" *ngIf="!isInscrito">
+                    <mat-label>Carta de no antecedentes penales</mat-label>
+                    <input matInput formControlName="chrCartaNoAntecedentesPenales" placeholder="Carta de no antecedentes penales">
+                    <div class="file-upload__container" (dragover)="onDragOver($event)"
+                        (drop)="onDrop($event, 'chrCartaNoAntecedentesPenales')">
+                        <input type="file" (change)="onFileSelected($event, 'chrCartaNoAntecedentesPenales')"
+                            class="file-upload__input" #fileInput>
+                        <div class="file-upload__drag-area">
+                            Arrastra y suelta aquí o haz clic para seleccionar un archivo
+                        </div>
+                    </div>
+                    <mat-checkbox formControlName="ischrCartaNoAntecedentesPenales">Justificante</mat-checkbox>
+                </mat-form-field>
+
+                <mat-form-field class="col-md-3 col-6" *ngIf="!isInscrito">
+                    <mat-label>Carta de aceptación de la universidad humani mundial</mat-label>
+                    <input matInput formControlName="chrCartaAceptacion" placeholder="Carta de aceptación de la universidad humani mundial">
+                    <div class="file-upload__container" (dragover)="onDragOver($event)"
+                        (drop)="onDrop($event, 'chrCartaAceptacion')">
+                        <input type="file" (change)="onFileSelected($event, 'chrCartaAceptacion')"
+                            class="file-upload__input" #fileInput>
+                        <div class="file-upload__drag-area">
+                            Arrastra y suelta aquí o haz clic para seleccionar un archivo
+                        </div>
+                    </div>
+                    <mat-checkbox formControlName="ischrCartaAceptacion">Justificante</mat-checkbox>
+                </mat-form-field>
+
+                <mat-form-field class="col-md-3 col-6" *ngIf="!isInscrito">
+                    <mat-label>Pago de inscripción</mat-label>
+                    <input matInput formControlName="chrPagoInscripcion" placeholder="Pago de inscripción">
+                    <div class="file-upload__container" (dragover)="onDragOver($event)"
+                        (drop)="onDrop($event, 'chrPagoInscripcion')">
+                        <input type="file" (change)="onFileSelected($event, 'chrPagoInscripcion')"
+                            class="file-upload__input" #fileInput>
+                        <div class="file-upload__drag-area">
+                            Arrastra y suelta aquí o haz clic para seleccionar un archivo
+                        </div>
+                    </div>
+                    <mat-checkbox formControlName="ischrPagoInscripcion">Justificante</mat-checkbox>
+                </mat-form-field>
+            </form>
+        </div>
+        <!-- archivos-alumno.component.html -->
+    <!-- archivos-alumno.component.html -->
+        <div class="archivos-container">
+            <div class="archivo-card" *ngFor="let archivo of lstArchivos">
+            <div class="archivo-icon">
+                <mat-icon [ngClass]="archivo.estado">
+                    insert_drive_file
+                </mat-icon>
+            </div>
+            <div class="archivo-desc" matTooltip="{{ archivo.descripcion }} - {{ archivo.fecha }} {{ archivo.hora }} - {{ archivo.estado }}">
+                <a [href]="getGoogleDriveUrl(archivo.ruta)" target="_blank" class="archivo-link">
+                {{ archivo.nombre }} ({{ archivo.tipo.split('/')[1].slice(0, 3) }}, {{ archivo.tamano }})
+                </a>
+                <p class="archivo-meta">{{ archivo.fecha }} {{ archivo.hora }} - {{ archivo.usuario }}</p>
+                <div class="archivo-actions">
+                <button mat-button (click)="editarArchivo(archivo)">
+                    <mat-icon>edit</mat-icon>
+                </button>
+                <button mat-button (click)="descargarArchivo(archivo)">
+                    <mat-icon>cloud_download</mat-icon>
+                </button>
+                </div>
+            </div>
+            </div>
+        </div>
+  
+  
+  
+
+        <!--BOTONES AL FINAL Y PEGADOS A LA DERECHA-->
+        <div class="d-flex justify-content-end">
+            <button class="mx-1" mat-stroked-button color="primary" (click)="guardar()" *ngIf="!isInscrito" [disabled]="!fifthFormGroup.valid">
+                Inscribir
+                <mat-icon>save</mat-icon>
+            </button>
+            <button class="mx-1" mat-stroked-button color="warn" (click)="cancelar()">
+                Cancelar
+                <mat-icon>close</mat-icon>
+            </button>
+        </div>
+
+    </mat-card-content>
+
+</mat-card>

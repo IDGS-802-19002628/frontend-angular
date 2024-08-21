@@ -1,0 +1,214 @@
+<app-loading-spinner [isLoading]="isLoading"></app-loading-spinner>
+
+<h1 mat-dialog-title>{{titulo}}</h1>
+
+<mat-dialog-content class="justify-content-center row">
+
+    <!-- export interface Citas {
+    chrClave: string;
+    chrClaveUsuario: string;
+    dtFecha: string;
+    chrObservaciones: string;
+    chrClaveDepartamento: string;
+    chrClaveUsuarioCitado: string;
+    chrEstatus: string;
+    chrPlantel: string;
+    dtEntrada: string;
+    dtSalida: string;
+    intMonto: number;
+    chrNombrePaciente: string;
+    chrNombreTerapeuta: string;
+    intEdad: number;
+    tipoCita: string;
+    chrCorreoElectronico: string;
+    chrNombre: string;
+    chrApellidoPaterno: string;
+    chrApellidoMaterno: string;
+}-->
+
+    <!-- Info de la cita en un mat-card -->
+
+    <mat-accordion class="w-100 m-t-12 p-24">
+        <mat-expansion-panel expanded="true">
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    <div class="d-flex w-100">
+                        <div class="flex-1-auto">Información de la cita</div>
+                    </div>
+                </mat-panel-title>
+                <mat-panel-description>
+                    Información de la cita
+                </mat-panel-description>
+            </mat-expansion-panel-header>
+
+            <div class="row col-md-12">
+                <p class="col-6 col-md-6 col-lg-6 m-r-3">{{cita.dtFecha}}  {{cita.dtEntrada}}</p>
+                <p class="col-6 col-md-6 col-lg-6 m-r-3">{{cita.tipoCita}}</p>
+                <p class="col-6 col-md-6 col-lg-6 m-r-3">{{cita.chrNombre + ' ' + cita.chrApellidoPaterno + ' ' +
+                    cita.chrApellidoMaterno}}</p>
+                <p class="col-6 col-md-6 col-lg-6 m-r-3">{{cita.chrCorreoElectronico}}</p>
+                <mat-form-field>
+                    <textarea matInput placeholder="Observaciones"
+                        class="col-12 col-md-12 col-lg-12 m-r-3" [value]="cita.chrObservaciones" [disabled]="true">
+                    </textarea>
+                </mat-form-field>
+            </div>
+
+            <!--    public formCita: any = this.fb.group({
+    chrResultados : ['',Validators.required],
+    chrAnexo : ['',Validators.required],
+    chrObservaciones : ['',Validators.required],
+    dtFecha : ['',Validators.required],
+    chrEstatus : ['',Validators.required],
+  })-->
+
+
+
+        </mat-expansion-panel>
+
+    </mat-accordion>
+
+    <mat-accordion class="w-100 m-t-12 p-24" *ngIf="cita.chrEstatus === 'aceptada'">
+        <mat-expansion-panel expanded="true">
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    <div class="d-flex w-100">
+                        <div class="flex-1-auto">Resultados de la cita</div>
+                    </div>
+                </mat-panel-title>
+                <mat-panel-description>
+                    Resultados de la cita
+                </mat-panel-description>
+            </mat-expansion-panel-header>
+            <div class="row col-md-12">
+                <form [formGroup]="formCita">
+                <mat-form-field class="col-12 col-md-12 col-lg-12 m-r-3">
+                    <mat-label>Resultados</mat-label>
+                    <mat-select formControlName="chrResultados">
+                        <mat-option value="aprobado">Aprobado</mat-option>
+                        <mat-option value="rechazado">Rechazado</mat-option>
+                    </mat-select>
+
+                    <mat-error *ngIf="formCita?.get('chrResultados')?.hasError('required')">
+                        Los resultados son requeridos
+                    </mat-error>
+                </mat-form-field>
+
+                <mat-form-field class="col-12 col-md-12 col-lg-12 m-r-3">
+                    <mat-label>Anexo</mat-label>
+                    <input matInput placeholder="Anexo" formControlName="chrAnexo">
+                    <div class="file-upload__container" (dragover)="onDragOver($event)"
+                        (drop)="onDrop($event, 'chrAnexo')">
+                        <input type="file" (change)="onFileSelected($event, 'chrAnexo')" class="file-upload__input"
+                            #fileInput>
+                        <div class="file-upload__drag-area">
+                            Arrastra y suelta aquí o haz clic para seleccionar un archivo
+                        </div>
+                        </div>
+                    <mat-error *ngIf="formCita?.get('chrAnexo')?.hasError('required')">
+                        El anexo es requerido
+                    </mat-error>
+                </mat-form-field>
+
+                <mat-form-field class="col-12 col-md-12 col-lg-12 m-r-3">
+                    <mat-label>Observaciones</mat-label>
+                    <textarea matInput placeholder="Observaciones" formControlName="chrObservaciones"></textarea>
+                    <mat-error *ngIf="formCita?.get('chrObservaciones')?.hasError('required')">
+                        Las observaciones son requeridas
+                    </mat-error>
+                </mat-form-field>
+
+
+                </form>
+            </div>
+
+        </mat-expansion-panel>
+
+    </mat-accordion>
+
+    <!--Autorizar o Rechazar-->
+
+    <mat-accordion class="w-100 m-t-12 p-24" *ngIf="cita.chrEstatus === 'pendiente'">
+        <mat-expansion-panel expanded="true">
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    <div class="d-flex w-100">
+                        <div class="flex-1-auto">Autorizar o Rechazar</div>
+                    </div>
+                </mat-panel-title>
+                <mat-panel-description>
+                    Autorizar o Rechazar
+                </mat-panel-description>
+            </mat-expansion-panel-header>
+            <div class="row col-md-12">
+                <form [formGroup]="formCita">
+                <mat-form-field class="col-12 col-md-12 col-lg-12 m-r-3">
+                    <mat-label>Acción</mat-label>
+                    <mat-select formControlName="chrEstatus">
+                        <mat-option value="aceptada">Autorizar</mat-option>
+                        <mat-option value="rechazada">Rechazar</mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="formCita?.get('chrEstatus')?.hasError('required')">
+                        La acción es requerida
+                    </mat-error>
+                </mat-form-field>
+
+                <mat-form-field class="col-12 col-md-12 col-lg-12 m-r-3">
+                    <mat-label>Fecha</mat-label>
+                    <input matInput [matDatepicker]="picker" formControlName="dtFecha">
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                    <mat-error *ngIf="formCita?.get('dtFecha')?.hasError('required')">
+                        La fecha es requerida
+                    </mat-error>
+                </mat-form-field>
+
+                <!--dtEntrada-->
+                <mat-form-field class="col-12 col-md-12 col-lg-12 m-r-3">
+                    <mat-label>Hora de entrada</mat-label>
+                    <input  matInput formControlName="dtEntrada">
+                    <mat-error *ngIf="formCita?.get('dtEntrada')?.hasError('required')">
+                        La hora de entrada es requerida
+                    </mat-error>
+                    <mat-error *ngIf="formCita?.get('dtEntrada')?.hasError('pattern')">
+                        Formato de 24 horas (HH:MM)
+                    </mat-error>
+                    <mat-hint>Formato de 24 horas (HH:MM)</mat-hint>
+                </mat-form-field>
+
+                
+                
+
+                <mat-form-field class="col-12 col-md-12 col-lg-12 m-r-3">
+                    <mat-label>Observaciones</mat-label>
+                    <textarea matInput placeholder="Observaciones" formControlName="chrObservaciones"></textarea>
+                    <mat-error *ngIf="formCita?.get('chrObservaciones')?.hasError('required')">
+                        Las observaciones son requeridas
+                    </mat-error>
+                </mat-form-field>
+                </form>
+
+            </div>
+        </mat-expansion-panel>
+    </mat-accordion>
+
+
+
+
+
+
+
+
+
+</mat-dialog-content>
+
+<mat-dialog-actions class="justify-content-end">
+    <button mat-button color="warn" (click)="onCancel()">
+        <mat-icon>cancel</mat-icon>
+        <span>Cancelar</span>
+    </button>
+    <button mat-button color="primary" (click)="onSave()" cdkFocusInitial [disabled]="formCita.invalid">
+        <mat-icon>save</mat-icon>
+        <span>Guardar</span>
+    </button>
+</mat-dialog-actions>

@@ -1,0 +1,76 @@
+<div class="container mt-4">
+  <!-- Spinner de carga -->
+  <div *ngIf="isLoading" class="d-flex justify-content-center">
+    <div class="spinner-border" role="status">
+      <span class="sr-only">Loading...</span>
+    </div>
+  </div>
+
+  <!-- Contenido -->
+  <div *ngIf="!isLoading">
+    <div class="card shadow">
+      <div class="card-body">
+        <h5 class="card-title">Órdenes de Producción Pendientes</h5>
+        <h6 class="card-subtitle mb-3 text-muted">Listado de órdenes de producción pendientes</h6>
+        
+        <!-- Barra de búsqueda -->
+        <div class="form-group">
+          <input type="text" class="form-control" placeholder="Buscar órdenes" (keyup)="doFilter($event)">
+        </div>
+
+        <!-- Formulario para crear nueva producción -->
+        <div class="form-group mt-4">
+          <h5>Crear Nueva Producción</h5>
+          <form (ngSubmit)="createProduction()">
+            <div class="form-group">
+              <label for="receta">Receta</label>
+              <select id="receta" class="form-control" [(ngModel)]="newProduction.recetaId" name="recetaId" required>
+                <option *ngFor="let producto of productos" [value]="producto.idProducto">
+                  {{ producto.nombre }}
+                </option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="cantidad">Cantidad</label>
+              <input type="number" id="cantidad" class="form-control" [(ngModel)]="newProduction.cantidad" name="cantidad" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Crear Producción</button>
+          </form>          
+        </div>
+        
+        <!-- Tabla de datos -->
+        <div class="table-responsive mt-4">
+          <table class="table table-hover">
+            <thead>
+              <tr>
+                <th>Producto</th>
+                <th>Cantidad</th>
+                <th>Estado</th>
+                <th>Fecha y Hora</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let production of productions">
+                <td>{{ production.receta?.producto || 'N/A' }}</td>
+                <td>{{ production.cantidad }}</td>
+                <td>{{ production.estado }}</td>
+                <td>{{ production.fechaRegistro }}</td>
+                <td>
+                  <!-- Mostrar botón Iniciar solo si el estado es "Pendiente" -->
+                  <button *ngIf="production.estado === 'Pendiente'" class="btn btn-primary btn-sm" (click)="startProduction(production.idProduccion)">Iniciar</button>
+                  
+                  <!-- Mostrar botón Completar solo si el estado es "Produciendo" -->
+                  <button *ngIf="production.estado === 'Produciendo'" class="btn btn-success btn-sm" (click)="completeProduction(production.idProduccion)">Completar</button>
+                  
+                  <!-- Mostrar botón Cancelar solo si el estado es "Pendiente" -->
+                  <button *ngIf="production.estado === 'Pendiente'" class="btn btn-danger btn-sm" (click)="cancelProduction(production.idProduccion)">Cancelar</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

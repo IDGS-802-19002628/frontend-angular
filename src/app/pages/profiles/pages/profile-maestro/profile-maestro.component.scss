@@ -1,0 +1,65 @@
+/* archivos-alumno.component.css */
+.archivos-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    margin: 20px;
+  }
+  
+  .archivo-card {
+    display: flex;
+    align-items: center;
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin: 10px;
+    width: 300px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: box-shadow 0.3s ease;
+  }
+  
+  .archivo-card:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+  
+  .archivo-icon {
+    width: 40px;
+    height: 40px;
+    margin-right: 15px;
+  }
+  
+  .archivo-desc {
+    flex: 1;
+  }
+  
+  .archivo-link {
+    color: #007bff;
+    text-decoration: none;
+    font-weight: bold;
+  }
+  
+  .archivo-link:hover {
+    text-decoration: underline;
+  }
+  
+  .archivo-meta {
+    color: #666;
+    font-size: 0.9em;
+  }
+  
+  .archivo-actions {
+    display: flex;
+    justify-content: right;
+    margin-top: 10px;
+  }
+  
+  button[mat-button] {
+    background-color: #f5f5f5;
+    border: 1px solid #ccc;
+    margin: 0 5px;
+  }
+  
+  button[mat-button]:hover {
+    background-color: #e0e0e0;
+  }
+  

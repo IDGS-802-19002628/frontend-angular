@@ -1,0 +1,12 @@
+<mat-card class="cardWithShadow">
+    <nav mat-tab-nav-bar [tabPanel]="tabPanel">
+        
+        <a mat-tab-link routerLink="/alumnos/listado-alumnos" [active]="isActive('/alumnos/listado-alumnos')">Alumnos</a>
+        <a mat-tab-link routerLink="/alumnos/listado-inscripciones"  [active]="isActive('/alumnos/listado-inscripciones')">Inscripciones</a>
+    </nav>
+    <mat-tab-nav-panel #tabPanel>
+        <div class="p-3">
+            <router-outlet></router-outlet>
+        </div>
+    </mat-tab-nav-panel>
+</mat-card>

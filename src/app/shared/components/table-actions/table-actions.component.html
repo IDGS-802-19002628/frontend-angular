@@ -1,0 +1,27 @@
+<mat-card-subtitle class="text-right">
+    <button *ngIf="modulo=='refacciones'" (click)="emitAddUbicacion(true)" mat-button class="btn-agregar" aria-label="Botón recargar">
+        Asignar Ubicación
+        <mat-icon color="primary">assignment_add</mat-icon>
+    </button>
+
+    <button mat-button *ngIf="visibleBtnAdd" class="btn-agregar" (click)="emitAddValue(true)" aria-label="Botón agregar">
+        {{textBotonAdd}}
+        <mat-icon color="primary">add_circle_outline</mat-icon>
+    </button>
+
+      <button mat-button class="btn-agregar" (click)="emitCancel()" aria-label="Botón cancelar" *ngIf="visibleBtnCancel">
+        {{textBotonCancel}}
+        <mat-icon color="warn">cancel</mat-icon>
+    </button>
+
+    <button mat-button class="btn-agregar" (click)="emitExportPDF()" aria-label="Botón exportar PDF" *ngIf="visibleBtnExportPDF">
+        {{textBotonExportPDF}}
+        <mat-icon color="primary">picture_as_pdf</mat-icon>
+    </button>
+
+    <button (click)="emitValue(true)" mat-button class="btn-agregar mr-1" aria-label="Botón recargar">
+        Refrescar
+        <mat-icon class="icon-refresh">sync</mat-icon>
+    </button>
+
+</mat-card-subtitle>

@@ -1,0 +1,32 @@
+
+
+<div class="verification-code">
+    <form [formGroup]="verificationForm">
+        <div class="inputs">
+
+            
+      
+            <input *ngFor="let i of lstInputs"type="text" formControlName="input{{i}}" (keyup)="onKeyUp($event, i)" maxlength="1" id="input{{i}}" >
+
+
+        </div>
+        <div class="resend">
+            <span>¿No recibiste el código?</span>
+            <a (click)="resendCode()">Reenviar código</a>
+            <span>en {{timeLeft}} segundos</span>
+            <span *ngIf="resendError" class="error">Error al reenviar el código</span>
+            <span *ngIf="resendSuccess" class="success">Código reenviado</span>
+            <span *ngIf="resendLoading" class="loading">Reenviando código...</span>
+        </div>
+        <div class="actions">
+            <button mat-raised-button color="primary" (click)="verifyCode()" [disabled]="!verificationForm.valid || loading">
+                Verificar
+            </button>
+            <button mat-raised-button color="warn" (click)="closeDialog()" [disabled]="loading">
+                Cancelar
+            </button>
+        </div>
+    </form>
+
+</div>
+

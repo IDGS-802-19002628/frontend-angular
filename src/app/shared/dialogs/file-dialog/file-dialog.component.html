@@ -1,0 +1,40 @@
+<!-- file-dialog.component.html -->
+<app-loading-spinner [isLoading]="isLoading"></app-loading-spinner>
+
+<h1 mat-dialog-title>Editar Archivo</h1>
+<div mat-dialog-content class="justify-content-center row">
+
+    <mat-form-field class="col-12">
+      <mat-label>Nombre del Archivo</mat-label>
+      <input matInput [(ngModel)]="data.nombre" name="nombre" disabled>
+    </mat-form-field>
+    <mat-form-field class="col-12">
+      <mat-label>ID del Archivo</mat-label>
+      <input matInput [(ngModel)]="data.id" name="id" disabled>
+    </mat-form-field>
+    <mat-form-field class="col-12">
+      <mat-label>Clave del Usuario</mat-label>
+      <input matInput [(ngModel)]="data.usuario" name="usuario" disabled>
+    </mat-form-field>
+    <input type="file" (change)="onFileSelected($event)" class="col-12">
+
+<div mat-dialog-actions  class="justify-content-end">
+  <button mat-button color="warn" (click)="onCancel()">
+    <mat-icon>cancel</mat-icon>
+    <span>Cancelar</span>
+    </button>
+    
+  <button mat-button color="primary" (click)="onSave()" cdkFocusInitial [disabled]="!data.nombre || !selectedFile">
+    <mat-icon>save</mat-icon>
+    <span>Guardar</span>
+    </button>
+    <button mat-button color="warn"  [disabled]="!data.nombre" *ngIf="autoriza" (click)="onReject()">
+      <mat-icon>cancel</mat-icon>
+      <span>Rechazar</span>
+    </button>
+    <button mat-button color="primary" [disabled]="!data.nombre" *ngIf="autoriza" (click)="onAutorice()">
+      <mat-icon> how_to_reg </mat-icon>
+      <span>Autorizar</span>
+    </button>
+</div>
+</div>

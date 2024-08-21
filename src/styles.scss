@@ -1,0 +1,167 @@
+
+// Custom Theming for Angular Material
+// For more information: https://material.angular.io/guide/theming
+@use '@angular/material' as mat;
+// Plus imports for other components in your app.
+
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+@include mat.core();
+
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue. Available color palettes: https://material.io/design/color/
+$testApp-primary: mat.define-palette(mat.$indigo-palette);
+$testApp-accent: mat.define-palette(mat.$pink-palette, A200, A100, A400);
+
+// The warn palette is optional (defaults to red).
+$testApp-warn: mat.define-palette(mat.$red-palette);
+
+// Create the theme object. A theme consists of configurations for individual
+// theming systems such as "color" or "typography".
+$testApp-theme: mat.define-light-theme((
+  color: (
+    primary: $testApp-primary,
+    accent: $testApp-accent,
+    warn: $testApp-warn,
+  )
+));
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+@include mat.all-component-themes($testApp-theme);
+
+/* You can add global styles to this file, and also import other style files */
+@import '~@angular/material/prebuilt-themes/indigo-pink.css';
+.float-right {
+  float: right;
+}
+
+.loading-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;     
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 9999;
+
+  }
+  
+  .btn-agregar {
+    display: flex;
+    flex-direction: row-reverse;
+    margin: 5px 0;
+    font-weight: 500;
+    font-size: 14px;
+    color: rgb(89, 89, 89) !important;
+}
+
+.btn-agregar mat-icon {
+    font-size: 24px !important;
+    height: auto !important;
+    width: auto !important;
+}
+
+.icon-refresh {
+  color: #ffb22b !important;
+}
+html, body { height: 100%; }
+
+.responsive-table {
+  overflow: auto;
+}
+
+@media (max-width: 600px) {
+  .responsive-table {
+      mat-header-row {
+          display: none;
+      }
+
+      mat-row {
+          flex-direction: column;
+          align-items: start;
+          padding: 8px 15px;
+          border-bottom: 1px solid rgba(0, 0, 0, 0.12) !important;
+
+          &:after {
+              min-height: unset;
+          }
+      }
+
+      mat-cell {
+          border: none;
+      }
+  }
+}
+
+
+.mat-mdc-menu-content {
+  max-height: 300px !important;
+  
+}
+.title-breadcrumb {
+  color: #8c9fa9;
+  font-size: 15px !important;
+  font-weight: 400;
+}
+
+.list-route {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+mat-icon.icon-breadcrumb {
+  font-size: 11px;
+  color: #99abb4;
+  height: auto;
+  width: auto;
+  padding: 0 8px;
+}
+
+.list-route li {
+  color: #99abb4;
+  font-size: 14px;
+  font-family: "Poppins", sans-serif;
+  font-weight: 300;
+}
+
+.file-upload {
+  width: 100%;
+}
+
+.file-upload__container {
+  position: relative;
+}
+
+.file-upload__input {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.file-upload__drag-area {
+  border: 2px dashed #ccc;
+  border-radius: 5px;
+  padding: 20px;
+  text-align: center;
+  color: #777;
+}
+
+.file-upload__drag-area.active {
+  border-color: #007bff;
+  color: #007bff;
+}
+
+
+

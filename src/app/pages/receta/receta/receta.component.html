@@ -1,0 +1,57 @@
+<!-- Botón para abrir/cerrar el formulario -->
+<button class="btn btn-primary mb-3" (click)="toggleForm()">
+  {{ showForm ? 'Cerrar Formulario' : 'Agregar Receta' }}
+</button>
+
+<!-- Formulario para agregar receta -->
+<div *ngIf="showForm" class="modal-content">
+  <form #recetaForm="ngForm" (ngSubmit)="registrarReceta()">
+    <div class="form-group">
+      <label for="productoId">Producto:</label>
+      <select id="productoId" class="form-control" [(ngModel)]="receta.productoIdProducto" name="productoId" required>
+        <option *ngFor="let producto of productos" [value]="producto.idProducto">
+          {{ producto.nombre }}
+        </option>
+      </select>
+    </div>
+
+    <div *ngFor="let materiaPrima of receta.materiasPrimas; let i=index" class="form-group">
+      <label for="materiaPid{{i}}">Materia Prima {{i + 1}}:</label>
+      <select id="materiaPid{{i}}" name="materiaPid{{i}}" [(ngModel)]="receta.materiasPrimas[i].materiaPid" required>
+        <option *ngFor="let mp of materiasPrimas" [value]="mp.idMateriaP">
+          {{ mp.nombre }}
+        </option>
+      </select>
+
+      <label for="cantidadRequerida{{i}}">Cantidad:</label>
+      <input type="number" id="cantidadRequerida{{i}}" name="cantidadRequerida{{i}}" [(ngModel)]="receta.materiasPrimas[i].cantidadRequerida" required>
+
+      <button type="button" class="btn btn-danger mt-2" (click)="removerMateriaPrima(i)">Eliminar</button>
+    </div>
+
+    <button type="button" class="btn btn-secondary" (click)="agregarMateriaPrima()">Agregar Materia Prima</button>
+    <button type="submit" class="btn btn-primary">Registrar Receta</button>
+  </form>
+</div>
+
+<!-- Mostrar recetas -->
+<div *ngIf="!isLoading && recetasAgrupadas.length > 0">
+  <h3>Lista de Recetas Agrupadas por Producto</h3>
+  <div *ngFor="let grupo of recetasAgrupadas" class="grupo-recetas">
+    <h4>Producto: {{ grupo.ProductoNombre }}</h4>
+    <ul class="list-group">
+      <li *ngFor="let receta of grupo.Recetas" class="list-group-item">
+        <h5>Receta ID: {{ receta.IdReceta }}</h5>
+        <ul>
+          <li *ngFor="let materia of receta.MateriasPrimas">
+            Materia Prima: {{ materia.Nombre }} - Cantidad Requerida: {{ materia.CantidadRequerida }}
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div *ngIf="!isLoading && recetasAgrupadas.length === 0">
+  <p>No hay recetas disponibles.</p>
+</div>

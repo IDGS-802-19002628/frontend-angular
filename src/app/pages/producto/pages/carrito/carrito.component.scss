@@ -1,0 +1,78 @@
+.carrito-content {
+  max-height: 70vh; /* Ajusta según el diseño */
+  overflow-y: auto; /* Permite el desplazamiento si el contenido es demasiado grande */
+}
+
+.carrito-item {
+  display: flex;
+  align-items: center;
+  padding: 12px 0; /* Ajusta el padding para un diseño más espacioso */
+}
+
+.carrito-image-container {
+  width: 60px; /* Ancho del contenedor circular */
+  height: 60px; /* Alto del contenedor circular */
+  border-radius: 50%; /* Hacer el contenedor circular */
+  overflow: hidden; /* Ocultar el contenido que sobresalga del contenedor */
+  margin-right: 16px; /* Espacio a la derecha del contenedor */
+  flex-shrink: 0; /* Para que el contenedor de la imagen no se reduzca */
+}
+
+.carrito-image {
+  width: 100%; /* La imagen ocupa todo el contenedor */
+  height: auto; /* Mantiene la proporción de la imagen */
+  object-fit: cover; /* Ajusta la imagen para cubrir todo el contenedor sin distorsionar */
+}
+
+.carrito-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-grow: 1; /* Permitir que el contenedor de la información crezca según el espacio disponible */
+}
+
+.carrito-details {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.carrito-price-container {
+  display: flex;
+  align-items: center;
+  gap: 16px; /* Espacio entre el precio y el botón de eliminar */
+}
+
+button[mat-icon-button] {
+  margin-left: 16px; /* Espacio adicional para separar el botón del precio */
+}
+
+h4, span {
+  margin: 0;
+}
+
+.badge-cart {
+  color: red; /* Color rojo para el número */
+  padding: 2px 6px;
+  border-radius: 50%;
+  font-size: 12px;
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  font-weight: bold;
+  display: inline-block;
+  min-width: 20px;
+  text-align: center;
+  background-color: transparent; /* Fondo transparente o del mismo color que el fondo del botón */
+}
+
+.quantity {
+  font-size: 20px; /* Tamaño más grande para el número de unidades */
+  font-weight: bold; /* Opcional: hace el texto en negrita */
+  text-align: center; /* Centra el número dentro del contenedor */
+  width: 40px; /* Ancho del contenedor del número */
+  display: inline-block; /* Asegura que el número se alinee correctamente */
+  line-height: 36px; /* Alinea verticalmente el número con el tamaño de los botones */
+}
+

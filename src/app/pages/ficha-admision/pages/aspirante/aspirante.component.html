@@ -1,0 +1,138 @@
+<app-loading-spinner [isLoading]="isLoading"></app-loading-spinner>
+<mat-card class="cardWithShadow">
+
+    <mat-card-content class="pt-0">
+        <app-table-actions textBotonAdd="Agregar"  textBotonExportPDF="Descargar FI" (onValue)="dataRefresh()"  (onExportPDF)="dataRefresh()" [visibleBtnAdd]="false"></app-table-actions>
+
+        <mat-accordion class="w-100 m-t-12 p-24">
+            <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        <div class="d-flex w-100">
+                            <div class="flex-1-auto">Filtros de busqueda</div>
+                        </div>
+                    </mat-panel-title>
+                    <mat-panel-description>
+                        Filtra la información de la tabla
+                    </mat-panel-description> 
+
+                </mat-expansion-panel-header>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4 p-4">
+
+                        <form [formGroup]="formSearch">
+                            <mat-form-field class="col-12 col-md-2 col-lg-2 m-r-3">
+                                <mat-label>Año</mat-label>
+                                <mat-select formControlName="year">
+                                    <mat-option *ngFor="let anio of anios" [value]="anio">{{anio}}</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                
+                            <mat-form-field class="col-12 col-md-2 col-lg-2 m-r-3">
+                                <mat-label>Mes</mat-label>
+                                <mat-select formControlName="month">
+                                    <mat-option *ngFor="let mes of meses" [value]="mes.value">{{mes.month}}</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+
+                            <mat-form-field class=" col-12 col-md-2 col-lg-2 m-r-3" *ngIf="isAdmin">
+                                <mat-label>plantel</mat-label>
+                                <mat-select formControlName="plantel" required>
+                                  <mat-option *ngFor="let plantel of lstEscuelas" [value]="plantel.chrClave">
+                                    {{ plantel.chrNombre }}
+                                  </mat-option>
+                                </mat-select>
+                              </mat-form-field>
+                            
+                
+                            <button mat-raised-button color="primary" [disabled]="formSearch.invalid" class="col-12 col-md-1 col-lg-1 m-r-3" (click)="getFichas()">
+                                Buscar
+                            </button>
+                     
+                        <mat-form-field class="col-12 col-md-5 col-lg-5 m-r-3 m-t-12">
+                            <mat-label>Search</mat-label>
+                            <input matInput placeholder="Buscar en tabla" (keyup)="doFilter($event)">
+                            <mat-icon matSuffix><i-tabler name="search"></i-tabler></mat-icon>
+                        </mat-form-field>
+                    </form>
+                </div>
+                
+            </mat-expansion-panel>
+        </mat-accordion>
+
+        <div class="responsive-table">
+                <!--  public displayedColumns: string[] = ['step' ,'chrNombre', 'chrApellidoPaterno', 'chrApellidoMaterno', 'chrCorreoElectronico', 'chrNumeroTelefono', 'chrGenero', 'chrDireccion', 'chrCiudadResidencia', 'chrPreparatoriaEgreso', 'chrLicenciaturaInteres', 'chrHorarioInteres', 'chrComoConocio', 'chrEstatus'];-->
+            <mat-table mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort matSortActive="chrNombre" matSortDirection="asc">
+                <ng-container matColumnDef="no">
+                    <mat-header-cell *matHeaderCellDef  > No. </mat-header-cell>
+                    <mat-cell *matCellDef="let element; let i = index" (dblclick)="agendarCita(element)"> {{i + 1}} </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="chrNombre">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header> Nombre </mat-header-cell>
+                    <mat-cell *matCellDef="let element"> 
+                        {{element.chrNombre.toLowerCase() | titlecase}}
+                    </mat-cell>
+                </ng-container>
+            
+                <ng-container matColumnDef="chrCorreoElectronico">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header> Datos de contacto</mat-header-cell>
+                    <mat-cell *matCellDef="let element" matTooltip="Correo: {{element.chrCorreoElectronico}} Teléfono: {{element.chrNumeroTelefono}}"  (dblclick)="agendarCita(element)">
+                        {{element.chrCorreoElectronico}} 
+                        <br>
+                        {{element.chrNumeroTelefono}}
+                    </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="chrNumeroTelefono">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header> Número de Teléfono </mat-header-cell>
+                    <mat-cell *matCellDef="let element"  (dblclick)="agendarCita(element)"> {{element.chrNumeroTelefono}} </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="chrGenero">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header> Género </mat-header-cell>
+                    <mat-cell *matCellDef="let element"  (dblclick)="agendarCita(element)"> {{element.chrGenero}} </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="chrDireccion">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header> Dirección </mat-header-cell>
+                    <mat-cell *matCellDef="let element" matTooltip="Dirección: {{element.chrDireccion}} Ciudad: {{element.chrCiudadResidencia}}"  (dblclick)="agendarCita(element)">
+                        {{element.chrDireccion}} <br> {{element.chrCiudadResidencia}}
+                    </mat-cell>
+                </ng-container>
+           
+                <ng-container matColumnDef="chrPreparatoriaEgreso">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header> Preparatoria de Egreso </mat-header-cell>
+                    <mat-cell *matCellDef="let element"> {{element.chrPreparatoriaEgreso}} </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="chrLicenciaturaInteres">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header> Licenciatura de Interés </mat-header-cell>
+                    <mat-cell *matCellDef="let element" matTooltip="Licenciatura: {{element.chrLicenciaturaInteres}} Horario: {{element.chrHorarioInteres}}"  (dblclick)="agendarCita(element)">
+                        {{element.chrLicenciaturaInteres}} <br>
+                        {{element.chrHorarioInteres}}
+                    </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="chrComoConocio">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header> ¿Cómo nos conoció? </mat-header-cell>
+                    <mat-cell *matCellDef="let element"  (dblclick)="agendarCita(element)"> {{element.chrComoConocio}} </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="progreso">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header> Progreso </mat-header-cell>
+                    <mat-cell *matCellDef="let element" matTooltip="Progreso: {{element.progreso}}%"  (dblclick)="agendarCita(element)">
+                        <mat-progress-bar mode="determinate" 
+                        [color]="getProgressColor(element.progreso)"
+                        [value]="element.progreso">
+                    </mat-progress-bar>
+                    </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="chrEstatus">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header> Pago </mat-header-cell>
+                    <mat-cell *matCellDef="let element"> 
+                        <span class="bg-light-success text-success rounded f-w-600 p-y-6 p-x-16 f-s-14" *ngIf="element.chrStatus == 'pagado'">Pagado</span>
+                        <span class="bg-light-warning text-warning rounded f-w-600 p-y-6 p-x-16 f-s-14" *ngIf="element.chrStatus == 'activo'">Pendiente</span>
+                    </mat-cell>
+                </ng-container>
+                <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+
+            </mat-table>
+            <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+
+        </div>
+    </mat-card-content>
+</mat-card>

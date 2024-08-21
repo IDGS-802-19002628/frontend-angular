@@ -1,0 +1,14 @@
+<mat-card class="cardWithShadow">
+    <nav mat-tab-nav-bar [tabPanel]="tabPanel">
+        
+        <a mat-tab-link routerLink="/catalogos/listado-ciclos" [active]="isActive('/catalogos/listado-ciclos')">Pendientes</a>
+        <a mat-tab-link routerLink="/catalogos/listado-escuelas"  [active]="isActive('/catalogos/listado-escuelas')">Proceso</a>
+        <a mat-tab-link routerLink="/catalogos/listado-grupos"  [active]="isActive('/catalogos/listado-grupos')">Terminados</a>
+
+    </nav>
+    <mat-tab-nav-panel #tabPanel>
+        <div class="p-3">
+            <router-outlet></router-outlet>
+        </div>
+    </mat-tab-nav-panel>
+</mat-card>

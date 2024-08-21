@@ -1,0 +1,21 @@
+.form-container {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .form-actions {
+    display: flex;
+    justify-content: flex-end; /* Alinea los botones a la derecha */
+    gap: 8px; /* Espacio entre los botones */
+    margin-top: 16px; /* Espacio superior para separar los botones del resto del contenido */
+  }
+  
+  .custom-red-button {
+    background-color: #f44336; /* Color rojo para el botón eliminar */
+    color: white; /* Color del texto en el botón */
+  }
+  
+  .custom-red-button:hover {
+    background-color: #d32f2f; /* Color rojo más oscuro al pasar el ratón */
+  }
+  

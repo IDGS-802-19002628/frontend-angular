@@ -1,0 +1,10 @@
+/* Define un color rojo para el botón */
+.red-button {
+    background-color: red;
+    color: white;
+  }
+  
+  .red-button.mat-raised-button {
+    background-color: red !important;
+    color: white !important;
+  }

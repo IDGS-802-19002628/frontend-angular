@@ -1,0 +1,52 @@
+<div class="row mt-4">
+  <div class="col-12 text-right position-relative">
+    <button mat-raised-button color="accent" (click)="verCarrito()" >
+      <i-tabler name="shopping-cart" class="icon-30"></i-tabler>
+      <span *ngIf="carrito.length > 0" class="badge-cart">
+        {{ carrito.length }}
+      </span>
+    </button>
+  </div>
+</div>
+<br>
+
+<div class="row">
+    <div class="col-sm-6 col-lg-3" *ngFor="let producto of Producto">
+      <mat-card class="cardWithShadow productcard overflow-hidden position-relative">
+        <a routerLink="/productos/detalle/{{ producto.idProducto }}">
+          <img
+            src="{{ producto.rutaImagen }}"
+            alt="{{ producto.nombre }}"
+            class="w-100"
+            mat-card-image
+          />
+        </a>
+       
+        <button
+          mat-mini-fab
+          color="primary"
+          class="icon-30 cart-btn"
+          matTooltip="agregar al carrito"
+          (click)="agregarAlCarrito(producto)"
+          style="position: absolute; top: 10px; right: 10px;" 
+        >
+          <i-tabler name="basket" class="icon-16"></i-tabler>
+        </button>
+      
+        <mat-card-content class="p-b-24 p-t-12 position-relative">
+          <br><br><br>
+          <mat-card-title class="mat-headline-2 f-s-16 m-b-4">{{ producto.nombre }}</mat-card-title>
+          <p class="mat-body-2">{{ producto.descripcion }}</p>
+          
+          <!-- Nueva línea para mostrar el stock -->
+          <p class="mat-body-2 f-w-600">Stock disponible: {{ producto.stock }}</p>
+          
+          <div class="d-flex align-items-center justify-content-between">
+            <div class="d-flex align-items-center">
+              <h6 class="mat-body-2 f-w-600">${{ producto.precio }}</h6>
+            </div>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+</div>
